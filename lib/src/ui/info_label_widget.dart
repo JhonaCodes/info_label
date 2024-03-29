@@ -74,7 +74,7 @@ class InfoLabel extends StatefulWidget {
 
   /// Creates a new instance of [InfoLabel].
   const InfoLabel({
-    Key? key,
+    super.key,
     required this.text,
     this.contrastLevel = 0.3,
     this.textColor,
@@ -89,9 +89,9 @@ class InfoLabel extends StatefulWidget {
     this.leftIcon,
     this.activeOnHover = true,
     this.margins = const EdgeInsets.only(left: 2, right: 2),
-    this.typeColor = TypeDistributionColor.solid,
+    this.typeColor = TypeDistributionColor.solidBorderTextContrastBackground,
     this.typeInfoLabel = TypeInfoLabel.none,
-  }) : super(key: key);
+  });
 
   @override
   State<InfoLabel> createState() => _InfoLabelState();
@@ -99,7 +99,7 @@ class InfoLabel extends StatefulWidget {
 
 class _InfoLabelState extends State<InfoLabel> {
   /// Indicates if the mouse is over the label.
-  bool isHovered = false;
+  bool _isHovered = false;
 
   @override
   void initState() {
@@ -114,13 +114,13 @@ class _InfoLabelState extends State<InfoLabel> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onEnter: widget.activeOnHover ? (_) => setState(() => isHovered = true) : null,
-      onExit: widget.activeOnHover ? (_) => setState(() => isHovered = false) : null,
-      child: Ink(
+      onEnter: widget.activeOnHover ? (_) => setState(() => _isHovered = true) : null,
+      onExit: widget.activeOnHover ? (_) => setState(() => _isHovered = false) : null,
+      child: Container(
         padding: widget.margins,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(widget.roundedCorners),
-          color: isHovered
+          color: _isHovered
               ? widget.onHoverColor ?? widget.globalColor?.withOpacity(widget.contrastLevel)
               : _typeLabelColor.backgroundColor,
           border: Border.all(color: widget.globalColor ?? _typeLabelColor.borderColor),
@@ -155,8 +155,7 @@ class _InfoLabelState extends State<InfoLabel> {
       contrastLevel: widget.contrastLevel,
       borderColor: widget.globalColor!,
       backgroundColor: widget.globalColor!,
-    )
-        : DistributionColor(
+    ) : DistributionColor(
       textColor: widget.textColor ?? _colorType,
       contrastLevel: widget.contrastLevel,
       borderColor: widget.borderColor ?? _colorType,
