@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:info_label/src/core/type_color.dart';
 
 /// Class representing color distribution configurations for labels.
