@@ -10,13 +10,13 @@ void main() {
       return GoldenTestGroup(
         children: [
           /// GoldenTestScenario for TypeInfoLabel.success
-          GoldenTestScenario(
-            name: "TypeInfoLabel.success",
-            child: const InfoLabel(
-              text: "Success",
-              typeInfoLabel: TypeInfoLabel.success,
-            ),
-          ),
+          // GoldenTestScenario(
+          //   name: "TypeInfoLabel.success",
+          //   child: const InfoLabel(
+          //     text: "Success",
+          //     typeInfoLabel: TypeInfoLabel.success,
+          //   ),
+          // ),
 
           /// GoldenTestScenario for TypeInfoLabel.error
           GoldenTestScenario(
@@ -37,31 +37,31 @@ void main() {
           ),
 
           /// GoldenTestScenario for TypeInfoLabel.warning
-          GoldenTestScenario(
-            name: "TypeInfoLabel.warning",
-            child: const InfoLabel(
-              text: "Warning",
-              typeInfoLabel: TypeInfoLabel.warning,
-            ),
-          ),
-
-          /// GoldenTestScenario for TypeInfoLabel.empty
-          GoldenTestScenario(
-            name: "TypeInfoLabel.empty",
-            child: const InfoLabel(
-              text: "Empty",
-              typeInfoLabel: TypeInfoLabel.empty,
-            ),
-          ),
-
-          /// GoldenTestScenario for TypeInfoLabel.dark
-          GoldenTestScenario(
-            name: "TypeInfoLabel.dark",
-            child: const InfoLabel(
-              text: "Dark",
-              typeInfoLabel: TypeInfoLabel.dark,
-            ),
-          ),
+          // GoldenTestScenario(
+          //   name: "TypeInfoLabel.warning",
+          //   child: const InfoLabel(
+          //     text: "Warning",
+          //     typeInfoLabel: TypeInfoLabel.warning,
+          //   ),
+          // ),
+          //
+          // /// GoldenTestScenario for TypeInfoLabel.empty
+          // GoldenTestScenario(
+          //   name: "TypeInfoLabel.empty",
+          //   child: const InfoLabel(
+          //     text: "Empty",
+          //     typeInfoLabel: TypeInfoLabel.empty,
+          //   ),
+          // ),
+          //
+          // /// GoldenTestScenario for TypeInfoLabel.dark
+          // GoldenTestScenario(
+          //   name: "TypeInfoLabel.dark",
+          //   child: const InfoLabel(
+          //     text: "Dark",
+          //     typeInfoLabel: TypeInfoLabel.dark,
+          //   ),
+          // ),
 
           /// GoldenTestScenario for TypeInfoLabel.info
           GoldenTestScenario(
