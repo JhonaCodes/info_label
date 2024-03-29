@@ -23,4 +23,4 @@ jobs:
             channel: 'stable'
         - run: |
             flutter pub get
-            TEST_NO_LOGS=1 flutter test
+            flutter test
