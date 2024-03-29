@@ -22,7 +22,7 @@
 /// ```dart
 /// TypeInfoLabel label = TypeInfoLabel.error;
 /// ```
-/// 
+///
 /// The colors associated with each label are provided by the `_ColorByTypeInfo` mixin.
 enum TypeInfoLabel {
   /// Indicates successful operation or positive outcome.

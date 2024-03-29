@@ -2,6 +2,13 @@
 
 ## Version 1.0.0
 
+### Mino Changes
+
+- **Improvement:** LICENSE
+
+
+## Version 1.0.0
+
 ### Major Changes
 
 - **Added:** Introduced the `InfoLabelWidget` component, allowing for customizable information labels in Flutter applications.

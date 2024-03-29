@@ -48,5 +48,3 @@ export 'package:info_label/src/ui/info_label_widget.dart';
 
 export 'package:info_label/src/core/type_color.dart';
 export 'package:info_label/src/core/type_info_label.dart';
-
-

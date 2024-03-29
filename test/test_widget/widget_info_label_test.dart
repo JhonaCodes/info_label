@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:info_label/info_label.dart';
 
-void main(){
+void main() {
   testWidgets('InfoLabel renders correctly', (WidgetTester tester) async {
     await tester.pumpWidget(
       const MaterialApp(
@@ -21,10 +21,9 @@ void main(){
     expect(find.byType(InfoLabel), findsOneWidget);
   });
 
-
   testWidgets('InfoLabel customization test', (WidgetTester tester) async {
     await tester.pumpWidget(
-     const  MaterialApp(
+      const MaterialApp(
         home: Scaffold(
           body: InfoLabel(
             text: 'Custom Label',
@@ -44,8 +43,4 @@ void main(){
     // Verify that the customized InfoLabel is rendered
     expect(find.byType(InfoLabel), findsOneWidget);
   });
-
-
-
-
 }

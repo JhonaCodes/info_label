@@ -6,7 +6,8 @@ import 'package:info_label/info_label.dart';
 
 void main() {
   group("GOLDEN_INFO_LABEL_TEST", () {
-    goldenTest('TypeInfoLabel', fileName: 'golden_type_info_label_test', builder: () {
+    goldenTest('TypeInfoLabel', fileName: 'golden_type_info_label_test',
+        builder: () {
       return GoldenTestGroup(
         children: [
           /// GoldenTestScenario for TypeInfoLabel.success
@@ -129,47 +130,53 @@ void main() {
       );
     });
 
-    goldenTest('Left - Right icon', fileName: 'golden_type_info_icons_test', builder: (){
-          return GoldenTestGroup(
-
-            children: [
-
-              GoldenTestScenario(
-                name: "TypeInfoLabel.info + Left icon",
-                child: const InfoLabel(
-                  text: "Info",
-                  leftIcon: Icon(Icons.error_outline, size: 12,),
-                  typeInfoLabel: TypeInfoLabel.info,
-                ),
+    goldenTest('Left - Right icon', fileName: 'golden_type_info_icons_test',
+        builder: () {
+      return GoldenTestGroup(
+        children: [
+          GoldenTestScenario(
+            name: "TypeInfoLabel.info + Left icon",
+            child: const InfoLabel(
+              text: "Info",
+              leftIcon: Icon(
+                Icons.error_outline,
+                size: 12,
               ),
-
-              GoldenTestScenario(
-                name: "TypeInfoLabel.info + Right icon",
-                child: const InfoLabel(
-                  text: "Info",
-                  rightIcon: Icon(Icons.error_outline, size: 12,),
-                  typeInfoLabel: TypeInfoLabel.info,
-                ),
+              typeInfoLabel: TypeInfoLabel.info,
+            ),
+          ),
+          GoldenTestScenario(
+            name: "TypeInfoLabel.info + Right icon",
+            child: const InfoLabel(
+              text: "Info",
+              rightIcon: Icon(
+                Icons.error_outline,
+                size: 12,
               ),
-
-
-              GoldenTestScenario(
-                name: "TypeInfoLabel.info + Right and left icon",
-                child: const InfoLabel(
-                  text: "Info",
-                  rightIcon: Icon(Icons.arrow_forward,size: 12,),
-                  leftIcon:  Icon(Icons.arrow_back,size: 12,),
-                  typeInfoLabel: TypeInfoLabel.info,
-                ),
+              typeInfoLabel: TypeInfoLabel.info,
+            ),
+          ),
+          GoldenTestScenario(
+            name: "TypeInfoLabel.info + Right and left icon",
+            child: const InfoLabel(
+              text: "Info",
+              rightIcon: Icon(
+                Icons.arrow_forward,
+                size: 12,
               ),
+              leftIcon: Icon(
+                Icons.arrow_back,
+                size: 12,
+              ),
+              typeInfoLabel: TypeInfoLabel.info,
+            ),
+          ),
+        ],
+      );
+    });
 
-            ],
-
-          );
-        });
-
-
-    goldenTest('Variations of Customized InfoLabel Tests', fileName: 'golden_customized_info_label_variations_test', builder: (){
+    goldenTest('Variations of Customized InfoLabel Tests',
+        fileName: 'golden_customized_info_label_variations_test', builder: () {
       return GoldenTestGroup(
         children: [
           // Customized InfoLabel 1
@@ -198,7 +205,8 @@ void main() {
               fontSize: 20,
               roundedCorners: 20,
               margins: EdgeInsets.all(16),
-              typeColor: TypeDistributionColor.solidBorderTextContrastBackground,
+              typeColor:
+                  TypeDistributionColor.solidBorderTextContrastBackground,
             ),
           ),
 
@@ -213,7 +221,8 @@ void main() {
               fontSize: 18,
               roundedCorners: 8,
               margins: EdgeInsets.symmetric(horizontal: 20),
-              typeColor: TypeDistributionColor.solidTextContrastBackgroundBorder,
+              typeColor:
+                  TypeDistributionColor.solidTextContrastBackgroundBorder,
             ),
           ),
 
@@ -228,7 +237,8 @@ void main() {
               fontSize: 14,
               roundedCorners: 12,
               margins: EdgeInsets.all(12),
-              typeColor: TypeDistributionColor.solidBackgroundBorderContrastText,
+              typeColor:
+                  TypeDistributionColor.solidBackgroundBorderContrastText,
             ),
           ),
 
@@ -243,7 +253,8 @@ void main() {
               fontSize: 16,
               roundedCorners: 10,
               margins: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              typeColor: TypeDistributionColor.solidTextContrastBackgroundBorder,
+              typeColor:
+                  TypeDistributionColor.solidTextContrastBackgroundBorder,
             ),
           ),
 
@@ -258,7 +269,8 @@ void main() {
               fontSize: 18,
               roundedCorners: 8,
               margins: EdgeInsets.all(10),
-              typeColor: TypeDistributionColor.solidBorderTextContrastBackground,
+              typeColor:
+                  TypeDistributionColor.solidBorderTextContrastBackground,
             ),
           ),
 
@@ -273,7 +285,8 @@ void main() {
               fontSize: 20,
               roundedCorners: 15,
               margins: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-              typeColor: TypeDistributionColor.solidTextContrastBackgroundBorder,
+              typeColor:
+                  TypeDistributionColor.solidTextContrastBackgroundBorder,
             ),
           ),
 
@@ -288,7 +301,8 @@ void main() {
               fontSize: 14,
               roundedCorners: 12,
               margins: EdgeInsets.all(16),
-              typeColor: TypeDistributionColor.solidBorderTextContrastBackground,
+              typeColor:
+                  TypeDistributionColor.solidBorderTextContrastBackground,
             ),
           ),
 
@@ -303,7 +317,8 @@ void main() {
               fontSize: 16,
               roundedCorners: 10,
               margins: EdgeInsets.symmetric(horizontal: 24),
-              typeColor: TypeDistributionColor.solidBackgroundTextContrastBorder,
+              typeColor:
+                  TypeDistributionColor.solidBackgroundTextContrastBorder,
             ),
           ),
 
@@ -333,7 +348,8 @@ void main() {
               fontSize: 18,
               roundedCorners: 8,
               margins: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-              typeColor: TypeDistributionColor.solidBorderTextContrastBackground,
+              typeColor:
+                  TypeDistributionColor.solidBorderTextContrastBackground,
             ),
           ),
 
@@ -348,7 +364,8 @@ void main() {
               fontSize: 16,
               roundedCorners: 12,
               margins: EdgeInsets.all(16),
-              typeColor: TypeDistributionColor.solidBorderTextContrastBackground,
+              typeColor:
+                  TypeDistributionColor.solidBorderTextContrastBackground,
             ),
           ),
 
@@ -363,7 +380,8 @@ void main() {
               fontSize: 18,
               roundedCorners: 10,
               margins: EdgeInsets.all(12),
-              typeColor: TypeDistributionColor.solidBackgroundBorderContrastText,
+              typeColor:
+                  TypeDistributionColor.solidBackgroundBorderContrastText,
             ),
           ),
 
@@ -393,7 +411,8 @@ void main() {
               fontSize: 18,
               roundedCorners: 12,
               margins: EdgeInsets.all(20),
-              typeColor: TypeDistributionColor.solidBorderTextContrastBackground,
+              typeColor:
+                  TypeDistributionColor.solidBorderTextContrastBackground,
             ),
           ),
 
@@ -408,7 +427,8 @@ void main() {
               fontSize: 16,
               roundedCorners: 10,
               margins: EdgeInsets.all(12),
-              typeColor: TypeDistributionColor.solidTextContrastBackgroundBorder,
+              typeColor:
+                  TypeDistributionColor.solidTextContrastBackgroundBorder,
             ),
           ),
 
@@ -423,7 +443,8 @@ void main() {
               fontSize: 20,
               roundedCorners: 15,
               margins: EdgeInsets.all(16),
-              typeColor: TypeDistributionColor.solidBorderTextContrastBackground,
+              typeColor:
+                  TypeDistributionColor.solidBorderTextContrastBackground,
             ),
           ),
 
@@ -438,7 +459,8 @@ void main() {
               fontSize: 18,
               roundedCorners: 12,
               margins: EdgeInsets.all(20),
-              typeColor: TypeDistributionColor.solidBorderTextContrastBackground,
+              typeColor:
+                  TypeDistributionColor.solidBorderTextContrastBackground,
             ),
           ),
 
@@ -453,7 +475,8 @@ void main() {
               fontSize: 16,
               roundedCorners: 10,
               margins: EdgeInsets.all(12),
-              typeColor: TypeDistributionColor.solidBorderTextContrastBackground,
+              typeColor:
+                  TypeDistributionColor.solidBorderTextContrastBackground,
             ),
           ),
 
@@ -468,14 +491,12 @@ void main() {
               fontSize: 20,
               roundedCorners: 15,
               margins: EdgeInsets.all(16),
-              typeColor: TypeDistributionColor.solidBorderTextContrastBackground,
+              typeColor:
+                  TypeDistributionColor.solidBorderTextContrastBackground,
             ),
           ),
         ],
       );
     });
-
-
-
   });
 }

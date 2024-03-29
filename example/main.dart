@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:info_label/info_label.dart';
 
-void main()=> runApp(const _MyApp());
+void main() => runApp(const _MyApp());
 
 class _MyApp extends StatelessWidget {
   const _MyApp({super.key});

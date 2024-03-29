@@ -103,7 +103,6 @@ class _InfoLabelState extends State<InfoLabel> {
 
   @override
   void initState() {
-
     /// Set default colors if textStyle and textColor are provided.
     if (widget.textStyle != null && widget.textColor != null) {
       widget.textStyle?.copyWith(color: widget.textColor);
@@ -114,16 +113,22 @@ class _InfoLabelState extends State<InfoLabel> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onEnter: widget.activeOnHover ? (_) => setState(() => _isHovered = true) : null,
-      onExit: widget.activeOnHover ? (_) => setState(() => _isHovered = false) : null,
+      onEnter: widget.activeOnHover
+          ? (_) => setState(() => _isHovered = true)
+          : null,
+      onExit: widget.activeOnHover
+          ? (_) => setState(() => _isHovered = false)
+          : null,
       child: Container(
         padding: widget.margins,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(widget.roundedCorners),
           color: _isHovered
-              ? widget.onHoverColor ?? widget.globalColor?.withOpacity(widget.contrastLevel)
+              ? widget.onHoverColor ??
+                  widget.globalColor?.withOpacity(widget.contrastLevel)
               : _typeLabelColor.backgroundColor,
-          border: Border.all(color: widget.globalColor ?? _typeLabelColor.borderColor),
+          border: Border.all(
+              color: widget.globalColor ?? _typeLabelColor.borderColor),
         ),
         child: Wrap(
           spacing: 2,
@@ -151,23 +156,23 @@ class _InfoLabelState extends State<InfoLabel> {
   DistributionColor get _typeLabelColor {
     final DistributionColor distributionColor = widget.globalColor != null
         ? DistributionColor(
-      textColor: widget.globalColor!,
-      contrastLevel: widget.contrastLevel,
-      borderColor: widget.globalColor!,
-      backgroundColor: widget.globalColor!,
-    ) : DistributionColor(
-      textColor: widget.textColor ?? _colorType,
-      contrastLevel: widget.contrastLevel,
-      borderColor: widget.borderColor ?? _colorType,
-      backgroundColor: widget.backgroundColor ?? _colorType,
-    );
+            textColor: widget.globalColor!,
+            contrastLevel: widget.contrastLevel,
+            borderColor: widget.globalColor!,
+            backgroundColor: widget.globalColor!,
+          )
+        : DistributionColor(
+            textColor: widget.textColor ?? _colorType,
+            contrastLevel: widget.contrastLevel,
+            borderColor: widget.borderColor ?? _colorType,
+            backgroundColor: widget.backgroundColor ?? _colorType,
+          );
     return distributionColor.labelInfoColors(typeColor: widget.typeColor);
   }
 
   /// Gets the color based on the label type.
   Color get _colorType => _ColorByTypeInfo.get(widget.typeInfoLabel);
 }
-
 
 /// Provides static methods to retrieve colors based on TypeInfoLabel.
 ///
@@ -177,24 +182,23 @@ class _InfoLabelState extends State<InfoLabel> {
 /// ```dart
 /// final successColor = _ColorByTypeInfo.get(TypeInfoLabel.success); // Returns Color(0xFF2ecc71)
 /// ```
-mixin _ColorByTypeInfo{
+mixin _ColorByTypeInfo {
   /// Returns a Color based on the provided TypeInfoLabel.
   ///
   /// If the provided TypeInfoLabel is not recognized, it returns a default color (Color(0xFFA8A8A8)).
-  static Color get(TypeInfoLabel type) => switch(type) {
-    TypeInfoLabel.success  => const Color(0xFF2ecc71),
-    TypeInfoLabel.error    => const Color(0xFFe74c3c),
-    TypeInfoLabel.neutral  => const Color(0xFF284b63),
-    TypeInfoLabel.warning  => const Color(0xFFf39c12),
-    TypeInfoLabel.empty    => const Color(0xFFdddddd),
-    TypeInfoLabel.dark     => const Color(0xFF000814),
-    TypeInfoLabel.info     => const Color(0xFF3498db),
-    TypeInfoLabel.pending  => const Color(0xFFf1c40f),
-    TypeInfoLabel.confirmed=> const Color(0xFF40E0D0),
-    TypeInfoLabel.expired  => const Color(0xFF663300),
-    TypeInfoLabel.disabled => const Color(0xFF8d99ae),
-    TypeInfoLabel.critical => const Color(0xFF660708),
-    TypeInfoLabel.none     => const Color(0xFFA8A8A8),
-  };
-
+  static Color get(TypeInfoLabel type) => switch (type) {
+        TypeInfoLabel.success => const Color(0xFF2ecc71),
+        TypeInfoLabel.error => const Color(0xFFe74c3c),
+        TypeInfoLabel.neutral => const Color(0xFF284b63),
+        TypeInfoLabel.warning => const Color(0xFFf39c12),
+        TypeInfoLabel.empty => const Color(0xFFdddddd),
+        TypeInfoLabel.dark => const Color(0xFF000814),
+        TypeInfoLabel.info => const Color(0xFF3498db),
+        TypeInfoLabel.pending => const Color(0xFFf1c40f),
+        TypeInfoLabel.confirmed => const Color(0xFF40E0D0),
+        TypeInfoLabel.expired => const Color(0xFF663300),
+        TypeInfoLabel.disabled => const Color(0xFF8d99ae),
+        TypeInfoLabel.critical => const Color(0xFF660708),
+        TypeInfoLabel.none => const Color(0xFFA8A8A8),
+      };
 }
