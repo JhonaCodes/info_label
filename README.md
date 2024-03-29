@@ -1,39 +1,82 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+Claro, aquí tienes un ejemplo detallado de un archivo README para tu biblioteca `info_label`:
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+# Info Label
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+![Flutter](https://img.shields.io/badge/Platform-Flutter-brightgreen)
+[![Pub Package](https://img.shields.io/pub/v/info_label.svg)](https://pub.dev/packages/info_label)
+[![License](https://img.shields.io/github/license/yourusername/info_label.svg)](https://opensource.org/licenses/MIT)
+
+## Overview
+
+Info Label is a Flutter library that provides customizable components for displaying information labels in Flutter applications. These labels can be used to convey various types of information, such as success messages, errors, warnings, or additional details, with flexible styling options.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- **InfoLabelWidget**: A widget for creating customizable information labels with text, icons, and various styling options.
+- **TypeDistributionColor**: An enum defining different color distribution configurations for labels to optimize readability and visual appeal.
+- **TypeInfoLabel**: An enum representing different types of labels with associated meanings and colors for quick and easy labeling of information.
 
-## Getting started
+## Installation
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+To use this package, add `info_label` as a dependency in your `pubspec.yaml` file. For example:
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  info_label: ^1.0.0
+```
+
+Then, import the library in your Dart code:
+
+```dart
+import 'package:info_label/info_label.dart';
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+Here's a simple example demonstrating how to use the `InfoLabelWidget`:
 
 ```dart
-const like = 'sample';
+import 'package:flutter/material.dart';
+import 'package:info_label/info_label.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Info Label Example'),
+        ),
+        body: Center(
+          child: InfoLabel(
+            text: 'Hello, World!',
+            backgroundColor: Colors.blue,
+            textColor: Colors.white,
+            typeColor: TypeDistributionColor.solid,
+          ),
+        ),
+      ),
+    );
+  }
+}
 ```
 
-## Additional information
+## Documentation
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+- [API Documentation](https://pub.dev/documentation/info_label/latest/)
+
+## Contributing
+
+Contributions to this project are welcome! If you have any ideas, suggestions, or find any issues, feel free to open an issue or submit a pull request on GitHub.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```
