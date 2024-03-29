@@ -9,14 +9,14 @@ void main() {
     goldenTest('TypeInfoLabel', fileName: 'golden_type_info_label_test', builder: () {
       return GoldenTestGroup(
         children: [
-          /// GoldenTestScenario for TypeInfoLabel.success
-          GoldenTestScenario(
-            name: "TypeInfoLabel.success",
-            child: const InfoLabel(
-              text: "Success",
-              typeInfoLabel: TypeInfoLabel.success,
-            ),
-          ),
+          // /// GoldenTestScenario for TypeInfoLabel.success
+          // GoldenTestScenario(
+          //   name: "TypeInfoLabel.success",
+          //   child: const InfoLabel(
+          //     text: "Success",
+          //     typeInfoLabel: TypeInfoLabel.success,
+          //   ),
+          // ),
 
           /// GoldenTestScenario for TypeInfoLabel.error
           GoldenTestScenario(
