@@ -24,4 +24,4 @@ jobs:
         - run: |
             # Export envs that get compiled in
             flutter pub get
-            TEST_NO_LOGS=1 flutter test --update-goldens
+            TEST_NO_LOGS=1 flutter test
