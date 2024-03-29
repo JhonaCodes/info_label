@@ -25,7 +25,7 @@ To use this package, add `info_label` as a dependency in your `pubspec.yaml` fil
 dependencies:
   flutter:
     sdk: flutter
-  info_label: ^1.0.0
+  info_label: ^1.0.1
 ```
 
 Then, import the library in your Dart code:
