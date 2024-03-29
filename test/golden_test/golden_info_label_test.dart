@@ -64,13 +64,13 @@ void main() {
           ),
 
           /// GoldenTestScenario for TypeInfoLabel.info
-          // GoldenTestScenario(
-          //   name: "TypeInfoLabel.info",
-          //   child: const InfoLabel(
-          //     text: "Info",
-          //     typeInfoLabel: TypeInfoLabel.info,
-          //   ),
-          // ),
+          GoldenTestScenario(
+            name: "TypeInfoLabel.info",
+            child: const InfoLabel(
+              text: "Info",
+              typeInfoLabel: TypeInfoLabel.info,
+            ),
+          ),
 
           /// GoldenTestScenario for TypeInfoLabel.pending
           GoldenTestScenario(
@@ -173,19 +173,19 @@ void main() {
       return GoldenTestGroup(
         children: [
           // Customized InfoLabel 1
-          GoldenTestScenario(
-            name: "Customized InfoLabel 1",
-            child: const InfoLabel(
-              text: "Custom 1",
-              typeInfoLabel: TypeInfoLabel.warning,
-              backgroundColor: Colors.yellow,
-              textColor: Colors.black,
-              fontSize: 16,
-              roundedCorners: 10,
-              margins: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-              typeColor: TypeDistributionColor.fullContrast,
-            ),
-          ),
+          // GoldenTestScenario(
+          //   name: "Customized InfoLabel 1",
+          //   child: const InfoLabel(
+          //     text: "Custom 1",
+          //     typeInfoLabel: TypeInfoLabel.warning,
+          //     backgroundColor: Colors.yellow,
+          //     textColor: Colors.black,
+          //     fontSize: 16,
+          //     roundedCorners: 10,
+          //     margins: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+          //     typeColor: TypeDistributionColor.fullContrast,
+          //   ),
+          // ),
 
           // Customized InfoLabel 2
           GoldenTestScenario(
