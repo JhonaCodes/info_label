@@ -37,40 +37,40 @@ void main() {
           ),
 
           /// GoldenTestScenario for TypeInfoLabel.warning
-          // GoldenTestScenario(
-          //   name: "TypeInfoLabel.warning",
-          //   child: const InfoLabel(
-          //     text: "Warning",
-          //     typeInfoLabel: TypeInfoLabel.warning,
-          //   ),
-          // ),
-          //
-          // /// GoldenTestScenario for TypeInfoLabel.empty
-          // GoldenTestScenario(
-          //   name: "TypeInfoLabel.empty",
-          //   child: const InfoLabel(
-          //     text: "Empty",
-          //     typeInfoLabel: TypeInfoLabel.empty,
-          //   ),
-          // ),
-          //
-          // /// GoldenTestScenario for TypeInfoLabel.dark
-          // GoldenTestScenario(
-          //   name: "TypeInfoLabel.dark",
-          //   child: const InfoLabel(
-          //     text: "Dark",
-          //     typeInfoLabel: TypeInfoLabel.dark,
-          //   ),
-          // ),
-
-          /// GoldenTestScenario for TypeInfoLabel.info
           GoldenTestScenario(
-            name: "TypeInfoLabel.info",
+            name: "TypeInfoLabel.warning",
             child: const InfoLabel(
-              text: "Info",
-              typeInfoLabel: TypeInfoLabel.info,
+              text: "Warning",
+              typeInfoLabel: TypeInfoLabel.warning,
             ),
           ),
+
+          /// GoldenTestScenario for TypeInfoLabel.empty
+          GoldenTestScenario(
+            name: "TypeInfoLabel.empty",
+            child: const InfoLabel(
+              text: "Empty",
+              typeInfoLabel: TypeInfoLabel.empty,
+            ),
+          ),
+
+          /// GoldenTestScenario for TypeInfoLabel.dark
+          GoldenTestScenario(
+            name: "TypeInfoLabel.dark",
+            child: const InfoLabel(
+              text: "Dark",
+              typeInfoLabel: TypeInfoLabel.dark,
+            ),
+          ),
+
+          /// GoldenTestScenario for TypeInfoLabel.info
+          // GoldenTestScenario(
+          //   name: "TypeInfoLabel.info",
+          //   child: const InfoLabel(
+          //     text: "Info",
+          //     typeInfoLabel: TypeInfoLabel.info,
+          //   ),
+          // ),
 
           /// GoldenTestScenario for TypeInfoLabel.pending
           GoldenTestScenario(
