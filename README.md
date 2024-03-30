@@ -5,6 +5,9 @@
 [![Pub Package](https://img.shields.io/pub/v/info_label.svg)](https://pub.dev/packages/info_label)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+![info_label](https://github.com/JhonaCodes/info_label/assets/53523825/93dbd9f1-a589-45c5-bbd2-32d224d5bd48)
+
+
 ## Overview
 
 Info Label is a Flutter library that provides customizable components for displaying information labels in Flutter applications. These labels can be used to convey various types of information, such as success messages, errors, warnings, or additional details, with flexible styling options.
@@ -73,7 +76,3 @@ class MyApp extends StatelessWidget {
 
 Contributions to this project are welcome! If you have any ideas, suggestions, or find any issues, feel free to open an issue or submit a pull request on GitHub.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
