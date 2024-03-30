@@ -1,15 +1,15 @@
 # info_label
 
-## Version 1.0.3
-
+## Version 1.0.4
 ### Minor Changes
+- **Improvement:** README.
 
+## Version 1.0.3
+### Minor Changes
 - **Improvement:** README.
 
 
-
 ## Version 1.0.2
-
 ### Minor Changes
 
 - **Improvement:** LICENSE.
@@ -18,14 +18,12 @@
 
 
 ## Version 1.0.1
-
 ### Minor Changes
 
 - **Improvement:** LICENSE.
 
 
 ## Version 1.0.0
-
 ### Major Changes
 
 - **Added:** Introduced the `InfoLabelWidget` component, allowing for customizable information labels in Flutter applications.
