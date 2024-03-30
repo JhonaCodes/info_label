@@ -13,10 +13,8 @@ import 'package:info_label/src/core/type_info_label.dart';
 /// Example Basic Usage:
 /// ```dart
 /// InfoLabel(
-///   text: 'Important Information',
-///   backgroundColor: Colors.blue,
-///   textColor: Colors.white,
-///   typeColor: TypeDistributionColor.solid,
+///  text: "Success",
+///   typeInfoLabel: TypeInfoLabel.success,
 /// )
 /// ```
 class InfoLabel extends StatefulWidget {
@@ -110,23 +108,18 @@ class _InfoLabelState extends State<InfoLabel> {
     super.initState();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onEnter: widget.activeOnHover
-          ? (_) => setState(() => _isHovered = true)
-          : null,
-      onExit: widget.activeOnHover
-          ? (_) => setState(() => _isHovered = false)
-          : null,
+      onEnter: _onHoverAction,
+      onExit: _onHoverAction,
       child: Container(
         padding: widget.margins,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(widget.roundedCorners),
-          color: _isHovered
-              ? widget.onHoverColor ??
-                  widget.globalColor?.withOpacity(widget.contrastLevel)
-              : _typeLabelColor.backgroundColor,
+          color: _colorOnHover,
           border: Border.all(
               color: widget.globalColor ?? _typeLabelColor.borderColor),
         ),
@@ -172,6 +165,22 @@ class _InfoLabelState extends State<InfoLabel> {
 
   /// Gets the color based on the label type.
   Color get _colorType => _ColorByTypeInfo.get(widget.typeInfoLabel);
+
+  /// Validate if is onHover
+  _onHoverAction(_) => widget.activeOnHover ? setState(() => _isHovered = !_isHovered) : null;
+
+  /// Return color for onHover
+  Color? get _colorOnHover {
+
+    if(_isHovered){
+      return widget.onHoverColor ?? widget.globalColor?.withOpacity(widget.contrastLevel);
+    }
+
+    return _typeLabelColor.backgroundColor;
+
+  }
+
+
 }
 
 /// Provides static methods to retrieve colors based on TypeInfoLabel.
@@ -200,5 +209,8 @@ mixin _ColorByTypeInfo {
         TypeInfoLabel.disabled => const Color(0xFF8d99ae),
         TypeInfoLabel.critical => const Color(0xFF660708),
         TypeInfoLabel.none => const Color(0xFFA8A8A8),
-      };
+  };
+
 }
+
+

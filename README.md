@@ -1,11 +1,9 @@
-Claro, aquí tienes un ejemplo detallado de un archivo README para tu biblioteca `info_label`:
-
-
 # Info Label
 
-![Flutter](https://img.shields.io/badge/Platform-Flutter-brightgreen)
+[![Dart 3](https://img.shields.io/badge/Dart-3%2B-blue.svg)](https://dart.dev/)
+[![Flutter 3.10](https://img.shields.io/badge/Flutter-3%2B-blue.svg)](https://flutter.dev/)
 [![Pub Package](https://img.shields.io/pub/v/info_label.svg)](https://pub.dev/packages/info_label)
-[![License](https://img.shields.io/github/license/yourusername/info_label.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Overview
 
@@ -17,15 +15,13 @@ Info Label is a Flutter library that provides customizable components for displa
 - **TypeDistributionColor**: An enum defining different color distribution configurations for labels to optimize readability and visual appeal.
 - **TypeInfoLabel**: An enum representing different types of labels with associated meanings and colors for quick and easy labeling of information.
 
-## Installation
+## Getting Started
 
-To use this package, add `info_label` as a dependency in your `pubspec.yaml` file. For example:
+1. Add the `info_label` package to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  flutter:
-    sdk: flutter
-  info_label: ^1.0.1
+  info_label: ^1.0.2
 ```
 
 Then, import the library in your Dart code:

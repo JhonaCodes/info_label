@@ -1,10 +1,20 @@
 # info_label
 
+
+## Version 1.0.2
+
+### Minor Changes
+
+- **Improvement:** LICENSE.
+- **Improvement:** README.
+- **Improvement:** InfoLabel widget validations.
+
+
 ## Version 1.0.1
 
-### Mino Changes
+### Minor Changes
 
-- **Improvement:** LICENSE
+- **Improvement:** LICENSE.
 
 
 ## Version 1.0.0
