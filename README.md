@@ -53,8 +53,6 @@ class MyApp extends StatelessWidget {
         body: Center(
           child: InfoLabel(
             text: 'Hello, World!',
-            backgroundColor: Colors.blue,
-            textColor: Colors.white,
             typeColor: TypeDistributionColor.solid,
           ),
         ),
@@ -63,6 +61,9 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
+<img width="200" alt="white_backgroud" src="https://github.com/JhonaCodes/info_label/assets/53523825/f59a4468-7303-4757-932c-b02aada584c7">
+
+<img width="200" alt="black_background" src="https://github.com/JhonaCodes/info_label/assets/53523825/9f818316-2be0-4a19-aa09-42a2759fe072">
 
 ## Documentation
 
