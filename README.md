@@ -64,9 +64,15 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
-<img width="200" alt="white_backgroud" src="https://github.com/JhonaCodes/info_label/assets/53523825/f59a4468-7303-4757-932c-b02aada584c7">
+## Current Golden test.
+<img width="600" alt="black_background" src="https://github.com/JhonaCodes/info_label/blob/main/test/golden_test/goldens/macos/golden_type_info_label_test.png">
+<img width="600" alt="black_background" src="https://github.com/JhonaCodes/info_label/blob/main/test/golden_test/goldens/macos/golden_type_info_icons_test.png">
+<img width="600" alt="white_backgroud" src="https://github.com/JhonaCodes/info_label/blob/main/test/golden_test/goldens/macos/golden_customized_info_label_variations_test.png">
 
+## On App.
+<img width="200" alt="white_backgroud" src="https://github.com/JhonaCodes/info_label/assets/53523825/f59a4468-7303-4757-932c-b02aada584c7">
 <img width="200" alt="black_background" src="https://github.com/JhonaCodes/info_label/assets/53523825/9f818316-2be0-4a19-aa09-42a2759fe072">
+
 
 ## Documentation
 
