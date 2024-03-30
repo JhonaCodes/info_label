@@ -108,8 +108,6 @@ class _InfoLabelState extends State<InfoLabel> {
     super.initState();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
@@ -167,20 +165,18 @@ class _InfoLabelState extends State<InfoLabel> {
   Color get _colorType => _ColorByTypeInfo.get(widget.typeInfoLabel);
 
   /// Validate if is onHover
-  _onHoverAction(_) => widget.activeOnHover ? setState(() => _isHovered = !_isHovered) : null;
+  _onHoverAction(_) =>
+      widget.activeOnHover ? setState(() => _isHovered = !_isHovered) : null;
 
   /// Return color for onHover
   Color? get _colorOnHover {
-
-    if(_isHovered){
-      return widget.onHoverColor ?? widget.globalColor?.withOpacity(widget.contrastLevel);
+    if (_isHovered) {
+      return widget.onHoverColor ??
+          widget.globalColor?.withOpacity(widget.contrastLevel);
     }
 
     return _typeLabelColor.backgroundColor;
-
   }
-
-
 }
 
 /// Provides static methods to retrieve colors based on TypeInfoLabel.
@@ -209,8 +205,5 @@ mixin _ColorByTypeInfo {
         TypeInfoLabel.disabled => const Color(0xFF8d99ae),
         TypeInfoLabel.critical => const Color(0xFF660708),
         TypeInfoLabel.none => const Color(0xFFA8A8A8),
-  };
-
+      };
 }
-
-
