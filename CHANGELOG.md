@@ -1,5 +1,6 @@
 # info_label
 
+## Version 1.0.5
 ## Version 1.0.4
 ### Minor Changes
 - **Improvement:** README.
