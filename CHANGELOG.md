@@ -1,5 +1,8 @@
 # info_label
 
+## Version 1.0.6
+- **Improvement:** Solid background per default, etc.
+
 ## Version 1.0.5
 ## Version 1.0.4
 ### Minor Changes

@@ -87,7 +87,7 @@ class InfoLabel extends StatefulWidget {
     this.leftIcon,
     this.activeOnHover = true,
     this.margins = const EdgeInsets.only(left: 2, right: 2),
-    this.typeColor = TypeDistributionColor.solidBorderTextContrastBackground,
+    this.typeColor = TypeDistributionColor.solidBackgroundTextContrastBorder,
     this.typeInfoLabel = TypeInfoLabel.none,
   });
 
@@ -133,7 +133,7 @@ class _InfoLabelState extends State<InfoLabel> {
                   TextStyle(
                     color: widget.globalColor ?? _typeLabelColor.textColor,
                     fontSize: widget.fontSize,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w600,
                   ),
             ),
             if (widget.rightIcon != null) widget.rightIcon!,
@@ -153,7 +153,7 @@ class _InfoLabelState extends State<InfoLabel> {
             backgroundColor: widget.globalColor!,
           )
         : DistributionColor(
-            textColor: widget.textColor ?? _colorType,
+            textColor: widget.textColor,
             contrastLevel: widget.contrastLevel,
             borderColor: widget.borderColor ?? _colorType,
             backgroundColor: widget.backgroundColor ?? _colorType,

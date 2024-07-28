@@ -27,7 +27,7 @@ class DistributionColor {
   final Color backgroundColor;
 
   /// Color of the label's text.
-  final Color textColor;
+  final Color? textColor;
 
   /// Contrast level between the label's colors.
   ///
@@ -42,7 +42,7 @@ class DistributionColor {
   const DistributionColor({
     required this.borderColor,
     required this.backgroundColor,
-    required this.textColor,
+    this.textColor,
     required this.contrastLevel,
   });
 
@@ -76,7 +76,7 @@ class DistributionColor {
         backgroundColor: backgroundColor,
         borderColor: borderColor.withOpacity(contrastLevel),
         contrastLevel: contrastLevel,
-        textColor: textColor,
+        textColor: textColor  ?? Colors.white,
       );
 
   /// Retrieves a new instance of [DistributionColor] with solid background, border contrast text.
@@ -87,7 +87,7 @@ class DistributionColor {
         backgroundColor: backgroundColor,
         borderColor: borderColor,
         contrastLevel: contrastLevel,
-        textColor: textColor.withOpacity(contrastLevel),
+        textColor:  textColor?.withOpacity(contrastLevel) ?? Colors.white,
       );
 
   /// Retrieves a new instance of [DistributionColor] with solid text, contrast background border.
@@ -98,7 +98,7 @@ class DistributionColor {
         backgroundColor: backgroundColor.withOpacity(contrastLevel),
         borderColor: borderColor.withOpacity(contrastLevel),
         contrastLevel: contrastLevel,
-        textColor: textColor,
+        textColor: textColor ?? Colors.white,
       );
 
   /// Retrieves a new instance of [DistributionColor] with full contrast.
@@ -109,7 +109,7 @@ class DistributionColor {
         backgroundColor: backgroundColor.withOpacity(contrastLevel),
         borderColor: borderColor.withOpacity(contrastLevel),
         contrastLevel: contrastLevel,
-        textColor: textColor.withOpacity(contrastLevel),
+        textColor: textColor?.withOpacity(contrastLevel) ?? Colors.white,
       );
 
   /// Returns a new instance of [DistributionColor] based on the specified [typeColor].
