@@ -1,6 +1,6 @@
 # info_label
 
-## Version 1.0.7
+## Version 1.0.8
 - **Improvement:** Improve widgets use.
 - **Fix:** Now is text centered correctly.
 
