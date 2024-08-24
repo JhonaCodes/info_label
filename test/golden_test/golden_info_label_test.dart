@@ -218,7 +218,8 @@ void main() {
               typeInfoLabel: TypeInfoLabel.error,
               fontSize: 18,
               roundedCorners: 8,
-              typeColor: TypeDistributionColor.solidTextContrastBackgroundBorder,
+              typeColor:
+                  TypeDistributionColor.solidTextContrastBackgroundBorder,
             ),
           ),
 

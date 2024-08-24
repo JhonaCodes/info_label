@@ -76,7 +76,7 @@ class DistributionColor {
         backgroundColor: backgroundColor,
         borderColor: borderColor?.withOpacity(contrastLevel),
         contrastLevel: contrastLevel,
-        textColor: textColor  ?? Colors.white,
+        textColor: textColor ?? Colors.white,
       );
 
   /// Retrieves a new instance of [DistributionColor] with solid background, border contrast text.
@@ -87,7 +87,7 @@ class DistributionColor {
         backgroundColor: backgroundColor,
         borderColor: borderColor,
         contrastLevel: contrastLevel,
-        textColor:  textColor?.withOpacity(contrastLevel) ?? Colors.white,
+        textColor: textColor?.withOpacity(contrastLevel) ?? Colors.white,
       );
 
   /// Retrieves a new instance of [DistributionColor] with solid text, contrast background border.
