@@ -212,17 +212,13 @@ void main() {
 
           // Customized InfoLabel 3
           GoldenTestScenario(
-            name: "Customized InfoLabel 3",
+            name: "solidTextContrastBackgroundBorder",
             child: const InfoLabel(
               text: "Custom 3",
               typeInfoLabel: TypeInfoLabel.error,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
               fontSize: 18,
               roundedCorners: 8,
-              margins: EdgeInsets.symmetric(horizontal: 20),
-              typeColor:
-                  TypeDistributionColor.solidTextContrastBackgroundBorder,
+              typeColor: TypeDistributionColor.solidTextContrastBackgroundBorder,
             ),
           ),
 

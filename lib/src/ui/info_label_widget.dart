@@ -86,8 +86,8 @@ class InfoLabel extends StatefulWidget {
     this.rightIcon,
     this.leftIcon,
     this.activeOnHover = true,
-    this.margins = const EdgeInsets.only(left: 2, right: 2),
-    this.typeColor = TypeDistributionColor.solidBackgroundTextContrastBorder,
+    this.margins = const EdgeInsets.only(left: 3.5, right: 3.5, bottom: 0, top: 0),
+    this.typeColor = TypeDistributionColor.solidTextContrastBackgroundBorder,
     this.typeInfoLabel = TypeInfoLabel.none,
   });
 
@@ -118,13 +118,13 @@ class _InfoLabelState extends State<InfoLabel> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(widget.roundedCorners),
           color: _colorOnHover,
-          border: Border.all(
-              color: widget.globalColor ?? _typeLabelColor.borderColor),
+          border: Border.all(color: _typeLabelColor.borderColor ?? Colors.transparent),
         ),
         child: Wrap(
           spacing: 2,
           direction: Axis.horizontal,
           crossAxisAlignment: WrapCrossAlignment.center,
+
           children: [
             if (widget.leftIcon != null) widget.leftIcon!,
             Text(
@@ -133,7 +133,7 @@ class _InfoLabelState extends State<InfoLabel> {
                   TextStyle(
                     color: widget.globalColor ?? _typeLabelColor.textColor,
                     fontSize: widget.fontSize,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w400,
                   ),
             ),
             if (widget.rightIcon != null) widget.rightIcon!,

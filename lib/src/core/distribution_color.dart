@@ -21,7 +21,7 @@ import 'package:info_label/src/core/type_color.dart';
 /// ```
 class DistributionColor {
   /// Color of the label's border.
-  final Color borderColor;
+  final Color? borderColor;
 
   /// Color of the label's background.
   final Color backgroundColor;
@@ -40,7 +40,7 @@ class DistributionColor {
   /// The [borderColor], [backgroundColor], [textColor], and [contrastLevel] parameters
   /// are required to define the color distribution configuration.
   const DistributionColor({
-    required this.borderColor,
+    this.borderColor = Colors.transparent,
     required this.backgroundColor,
     this.textColor,
     required this.contrastLevel,
@@ -74,7 +74,7 @@ class DistributionColor {
   /// while ensuring a contrasting color for the border, enhancing visibility.
   DistributionColor get _solidBackgroundTextContrastBorder => DistributionColor(
         backgroundColor: backgroundColor,
-        borderColor: borderColor.withOpacity(contrastLevel),
+        borderColor: borderColor?.withOpacity(contrastLevel),
         contrastLevel: contrastLevel,
         textColor: textColor  ?? Colors.white,
       );
@@ -96,9 +96,8 @@ class DistributionColor {
   /// while ensuring contrasting colors for the background and border, optimizing readability.
   DistributionColor get _solidTextContrastBackgroundBorder => DistributionColor(
         backgroundColor: backgroundColor.withOpacity(contrastLevel),
-        borderColor: borderColor.withOpacity(contrastLevel),
         contrastLevel: contrastLevel,
-        textColor: textColor ?? Colors.white,
+        textColor: textColor ?? backgroundColor,
       );
 
   /// Retrieves a new instance of [DistributionColor] with full contrast.
@@ -107,7 +106,7 @@ class DistributionColor {
   /// text, background, and border, maximizing visibility and readability.
   DistributionColor get _fullContrast => DistributionColor(
         backgroundColor: backgroundColor.withOpacity(contrastLevel),
-        borderColor: borderColor.withOpacity(contrastLevel),
+        borderColor: borderColor?.withOpacity(contrastLevel),
         contrastLevel: contrastLevel,
         textColor: textColor?.withOpacity(contrastLevel) ?? Colors.white,
       );
