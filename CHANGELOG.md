@@ -1,6 +1,10 @@
 # info_label
 
 ## Version 1.0.7
+- **Improvement:** Improve widgets use.
+- **Fix:** Now is text centered correctly.
+
+## Version 1.0.7
 - **Improvement:** Update `TypeDistributionColor`.
 
 ## Version 1.0.6

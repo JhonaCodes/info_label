@@ -1,6 +1,6 @@
 name: info_label
 description: "info_label is a Flutter library that provides customizable components for displaying information."
-version: 1.0.7
+version: 1.0.8
 homepage: https://github.com/JhonaCodes/info_label.git
 
 environment:

@@ -114,31 +114,44 @@ class _InfoLabelState extends State<InfoLabel> {
     return MouseRegion(
       onEnter: _onHoverAction,
       onExit: _onHoverAction,
-      child: Container(
-        padding: widget.margins,
+      child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(widget.roundedCorners),
           color: _colorOnHover,
           border: Border.all(
               color: _typeLabelColor.borderColor ?? Colors.transparent),
         ),
-        child: Wrap(
-          spacing: 2,
-          direction: Axis.horizontal,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            if (widget.leftIcon != null) widget.leftIcon!,
-            Text(
-              widget.text,
-              style: widget.textStyle ??
-                  TextStyle(
-                    color: widget.globalColor ?? _typeLabelColor.textColor,
-                    fontSize: widget.fontSize,
-                    fontWeight: FontWeight.w400,
-                  ),
-            ),
-            if (widget.rightIcon != null) widget.rightIcon!,
-          ],
+        child: Padding(
+          padding: widget.margins,
+          child: Flex(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            direction: Axis.horizontal,
+            children: [
+              if (widget.leftIcon != null) widget.leftIcon!,
+              const SizedBox(
+                width: 2,
+              ),
+              Flexible(
+                flex: 1,
+                fit: FlexFit.loose,
+                child: Text(
+                  widget.text,
+                  style: widget.textStyle ??
+                      TextStyle(
+                        color: widget.globalColor ?? _typeLabelColor.textColor,
+                        fontSize: widget.fontSize,
+                        fontWeight: FontWeight.w500,
+                      ),
+                ),
+              ),
+              const SizedBox(
+                width: 2,
+              ),
+              if (widget.rightIcon != null) widget.rightIcon!,
+            ],
+          ),
         ),
       ),
     );

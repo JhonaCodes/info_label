@@ -24,7 +24,7 @@ Info Label is a Flutter library that provides customizable components for displa
 
 ```yaml
 dependencies:
-  info_label: ^1.0.7
+  info_label: ^1.0.8
 ```
 
 Then, import the library in your Dart code:
