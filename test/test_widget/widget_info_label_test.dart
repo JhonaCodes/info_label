@@ -32,7 +32,6 @@ void main() {
             fontSize: 20.0,
             leftIcon: Icon(Icons.info),
             rightIcon: Icon(Icons.check),
-            margins: EdgeInsets.all(8.0),
             roundedCorners: 10.0,
             typeColor: TypeDistributionColor.fullContrast,
           ),

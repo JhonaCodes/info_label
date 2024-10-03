@@ -203,7 +203,6 @@ void main() {
               textColor: Colors.white,
               fontSize: 20,
               roundedCorners: 20,
-              margins: EdgeInsets.all(16),
               typeColor:
                   TypeDistributionColor.solidBorderTextContrastBackground,
             ),
@@ -232,7 +231,7 @@ void main() {
               textColor: Colors.white,
               fontSize: 14,
               roundedCorners: 12,
-              margins: EdgeInsets.all(12),
+
               typeColor:
                   TypeDistributionColor.solidBackgroundBorderContrastText,
             ),
@@ -248,7 +247,7 @@ void main() {
               textColor: Colors.black,
               fontSize: 16,
               roundedCorners: 10,
-              margins: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+
               typeColor:
                   TypeDistributionColor.solidTextContrastBackgroundBorder,
             ),
@@ -264,7 +263,7 @@ void main() {
               textColor: Colors.white,
               fontSize: 18,
               roundedCorners: 8,
-              margins: EdgeInsets.all(10),
+
               typeColor:
                   TypeDistributionColor.solidBorderTextContrastBackground,
             ),
@@ -280,7 +279,7 @@ void main() {
               textColor: Colors.white,
               fontSize: 20,
               roundedCorners: 15,
-              margins: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+
               typeColor:
                   TypeDistributionColor.solidTextContrastBackgroundBorder,
             ),
@@ -296,7 +295,7 @@ void main() {
               textColor: Colors.black,
               fontSize: 14,
               roundedCorners: 12,
-              margins: EdgeInsets.all(16),
+
               typeColor:
                   TypeDistributionColor.solidBorderTextContrastBackground,
             ),
@@ -312,7 +311,6 @@ void main() {
               textColor: Colors.white,
               fontSize: 16,
               roundedCorners: 10,
-              margins: EdgeInsets.symmetric(horizontal: 24),
               typeColor:
                   TypeDistributionColor.solidBackgroundTextContrastBorder,
             ),
@@ -328,7 +326,6 @@ void main() {
               textColor: Colors.white,
               fontSize: 20,
               roundedCorners: 15,
-              margins: EdgeInsets.all(20),
               typeColor: TypeDistributionColor.fullContrast,
             ),
           ),
@@ -343,7 +340,6 @@ void main() {
               textColor: Colors.black,
               fontSize: 18,
               roundedCorners: 8,
-              margins: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
               typeColor:
                   TypeDistributionColor.solidBorderTextContrastBackground,
             ),
@@ -359,7 +355,7 @@ void main() {
               textColor: Colors.white,
               fontSize: 16,
               roundedCorners: 12,
-              margins: EdgeInsets.all(16),
+
               typeColor:
                   TypeDistributionColor.solidBorderTextContrastBackground,
             ),
@@ -375,7 +371,7 @@ void main() {
               textColor: Colors.black,
               fontSize: 18,
               roundedCorners: 10,
-              margins: EdgeInsets.all(12),
+
               typeColor:
                   TypeDistributionColor.solidBackgroundBorderContrastText,
             ),
@@ -391,7 +387,6 @@ void main() {
               textColor: Colors.white,
               fontSize: 20,
               roundedCorners: 15,
-              margins: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
               typeColor: TypeDistributionColor.fullContrast,
             ),
           ),
@@ -406,7 +401,6 @@ void main() {
               textColor: Colors.white,
               fontSize: 18,
               roundedCorners: 12,
-              margins: EdgeInsets.all(20),
               typeColor:
                   TypeDistributionColor.solidBorderTextContrastBackground,
             ),
@@ -422,7 +416,7 @@ void main() {
               textColor: Colors.white,
               fontSize: 16,
               roundedCorners: 10,
-              margins: EdgeInsets.all(12),
+
               typeColor:
                   TypeDistributionColor.solidTextContrastBackgroundBorder,
             ),
@@ -438,7 +432,7 @@ void main() {
               textColor: Colors.black,
               fontSize: 20,
               roundedCorners: 15,
-              margins: EdgeInsets.all(16),
+
               typeColor:
                   TypeDistributionColor.solidBorderTextContrastBackground,
             ),
@@ -454,7 +448,6 @@ void main() {
               textColor: Colors.white,
               fontSize: 18,
               roundedCorners: 12,
-              margins: EdgeInsets.all(20),
               typeColor:
                   TypeDistributionColor.solidBorderTextContrastBackground,
             ),
@@ -470,7 +463,7 @@ void main() {
               textColor: Colors.white,
               fontSize: 16,
               roundedCorners: 10,
-              margins: EdgeInsets.all(12),
+
               typeColor:
                   TypeDistributionColor.solidBorderTextContrastBackground,
             ),
@@ -486,7 +479,7 @@ void main() {
               textColor: Colors.black,
               fontSize: 20,
               roundedCorners: 15,
-              margins: EdgeInsets.all(16),
+
               typeColor:
                   TypeDistributionColor.solidBorderTextContrastBackground,
             ),
