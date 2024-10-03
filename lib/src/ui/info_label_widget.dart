@@ -77,6 +77,7 @@ class InfoLabel extends StatefulWidget {
   final EdgeInsetsGeometry? rightIconPadding;
 
   final EdgeInsetsGeometry? textPadding;
+
   /// Creates a new instance of [InfoLabel].
   const InfoLabel({
     super.key,
@@ -133,14 +134,18 @@ class _InfoLabelState extends State<InfoLabel> {
         ),
         child: Flex(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: widget.mainAxisAlignment ?? MainAxisAlignment.center,
-          crossAxisAlignment: widget.crossAxisAlignment ?? CrossAxisAlignment.start,
+          mainAxisAlignment:
+              widget.mainAxisAlignment ?? MainAxisAlignment.center,
+          crossAxisAlignment:
+              widget.crossAxisAlignment ?? CrossAxisAlignment.start,
           direction: Axis.horizontal,
           children: [
-            if (widget.leftIcon != null) Padding(
-              padding: widget.leftIconPadding ?? const EdgeInsets.only(top: 3.0, left: 3.0),
-              child: widget.leftIcon!,
-            ),
+            if (widget.leftIcon != null)
+              Padding(
+                padding: widget.leftIconPadding ??
+                    const EdgeInsets.only(top: 3.0, left: 3.0),
+                child: widget.leftIcon!,
+              ),
             const SizedBox(
               width: 2,
             ),
@@ -163,10 +168,12 @@ class _InfoLabelState extends State<InfoLabel> {
             const SizedBox(
               width: 2,
             ),
-            if (widget.rightIcon != null) Padding(
-              padding: widget.rightIconPadding ?? const EdgeInsets.only(top: 3.0,right: 3.0),
-              child: widget.rightIcon!,
-            ),
+            if (widget.rightIcon != null)
+              Padding(
+                padding: widget.rightIconPadding ??
+                    const EdgeInsets.only(top: 3.0, right: 3.0),
+                child: widget.rightIcon!,
+              ),
           ],
         ),
       ),

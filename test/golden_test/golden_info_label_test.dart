@@ -231,7 +231,6 @@ void main() {
               textColor: Colors.white,
               fontSize: 14,
               roundedCorners: 12,
-
               typeColor:
                   TypeDistributionColor.solidBackgroundBorderContrastText,
             ),
@@ -247,7 +246,6 @@ void main() {
               textColor: Colors.black,
               fontSize: 16,
               roundedCorners: 10,
-
               typeColor:
                   TypeDistributionColor.solidTextContrastBackgroundBorder,
             ),
@@ -263,7 +261,6 @@ void main() {
               textColor: Colors.white,
               fontSize: 18,
               roundedCorners: 8,
-
               typeColor:
                   TypeDistributionColor.solidBorderTextContrastBackground,
             ),
@@ -279,7 +276,6 @@ void main() {
               textColor: Colors.white,
               fontSize: 20,
               roundedCorners: 15,
-
               typeColor:
                   TypeDistributionColor.solidTextContrastBackgroundBorder,
             ),
@@ -295,7 +291,6 @@ void main() {
               textColor: Colors.black,
               fontSize: 14,
               roundedCorners: 12,
-
               typeColor:
                   TypeDistributionColor.solidBorderTextContrastBackground,
             ),
@@ -355,7 +350,6 @@ void main() {
               textColor: Colors.white,
               fontSize: 16,
               roundedCorners: 12,
-
               typeColor:
                   TypeDistributionColor.solidBorderTextContrastBackground,
             ),
@@ -371,7 +365,6 @@ void main() {
               textColor: Colors.black,
               fontSize: 18,
               roundedCorners: 10,
-
               typeColor:
                   TypeDistributionColor.solidBackgroundBorderContrastText,
             ),
@@ -416,7 +409,6 @@ void main() {
               textColor: Colors.white,
               fontSize: 16,
               roundedCorners: 10,
-
               typeColor:
                   TypeDistributionColor.solidTextContrastBackgroundBorder,
             ),
@@ -432,7 +424,6 @@ void main() {
               textColor: Colors.black,
               fontSize: 20,
               roundedCorners: 15,
-
               typeColor:
                   TypeDistributionColor.solidBorderTextContrastBackground,
             ),
@@ -463,7 +454,6 @@ void main() {
               textColor: Colors.white,
               fontSize: 16,
               roundedCorners: 10,
-
               typeColor:
                   TypeDistributionColor.solidBorderTextContrastBackground,
             ),
@@ -479,7 +469,6 @@ void main() {
               textColor: Colors.black,
               fontSize: 20,
               roundedCorners: 15,
-
               typeColor:
                   TypeDistributionColor.solidBorderTextContrastBackground,
             ),
