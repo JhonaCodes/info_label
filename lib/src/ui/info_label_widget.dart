@@ -126,7 +126,7 @@ class _InfoLabelState extends State<InfoLabel> {
           child: Flex(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             direction: Axis.horizontal,
             children: [
               if (widget.leftIcon != null) widget.leftIcon!,
