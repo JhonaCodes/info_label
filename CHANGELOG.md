@@ -1,5 +1,9 @@
 # info_label
 
+## Version 1.1.0
+- **Remove global margin**
+- **User margin for icons and content**
+
 ## Version 1.0.8
 - **Improvement:** Improve widgets use.
 - **Fix:** Now is text centered correctly.
