@@ -70,10 +70,17 @@ class InfoLabel extends StatefulWidget {
   /// Type of label defining default colors for a specific appearance.
   final TypeInfoLabel typeInfoLabel;
 
+  /// Alignment for content
+  final MainAxisAlignment? mainAxisAlignment;
+
+  final CrossAxisAlignment? crossAxisAlignment;
+
   /// Creates a new instance of [InfoLabel].
   const InfoLabel({
     super.key,
     required this.text,
+    this.mainAxisAlignment,
+    this.crossAxisAlignment,
     this.contrastLevel = 0.3,
     this.textColor,
     this.borderColor,
@@ -125,8 +132,8 @@ class _InfoLabelState extends State<InfoLabel> {
           padding: widget.margins,
           child: Flex(
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: widget.mainAxisAlignment ?? MainAxisAlignment.center,
+            crossAxisAlignment: widget.crossAxisAlignment ?? CrossAxisAlignment.start,
             direction: Axis.horizontal,
             children: [
               if (widget.leftIcon != null) widget.leftIcon!,
