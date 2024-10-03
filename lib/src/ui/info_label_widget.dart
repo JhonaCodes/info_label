@@ -138,7 +138,7 @@ class _InfoLabelState extends State<InfoLabel> {
           direction: Axis.horizontal,
           children: [
             if (widget.leftIcon != null) Padding(
-              padding: widget.leftIconPadding ?? const EdgeInsets.all(1.75),
+              padding: widget.leftIconPadding ?? const EdgeInsets.only(top: 3, left: 1.75,right: 1.75),
               child: widget.leftIcon!,
             ),
             const SizedBox(
@@ -164,7 +164,7 @@ class _InfoLabelState extends State<InfoLabel> {
               width: 2,
             ),
             if (widget.rightIcon != null) Padding(
-              padding: widget.rightIconPadding ?? const EdgeInsets.all(1.75),
+              padding: widget.rightIconPadding ?? const EdgeInsets.only(top: 3, left: 1.75,right: 1.75),
               child: widget.rightIcon!,
             ),
           ],
