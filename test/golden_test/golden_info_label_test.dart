@@ -189,7 +189,6 @@ void main() {
               textColor: Colors.black,
               fontSize: 16,
               roundedCorners: 10,
-              margins: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
               typeColor: TypeDistributionColor.fullContrast,
             ),
           ),
