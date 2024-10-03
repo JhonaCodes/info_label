@@ -61,9 +61,6 @@ class InfoLabel extends StatefulWidget {
   /// Indicates whether hover functionality is enabled.
   final bool activeOnHover;
 
-  /// Margins around the content of the label (text and icons).
-  final EdgeInsets? margins;
-
   /// Distribution of colors for the label appearance.
   final TypeDistributionColor typeColor;
 
@@ -75,6 +72,11 @@ class InfoLabel extends StatefulWidget {
 
   final CrossAxisAlignment? crossAxisAlignment;
 
+  final EdgeInsetsGeometry? leftIconPadding;
+
+  final EdgeInsetsGeometry? rightIconPadding;
+
+  final EdgeInsetsGeometry? textPadding;
   /// Creates a new instance of [InfoLabel].
   const InfoLabel({
     super.key,
@@ -82,6 +84,9 @@ class InfoLabel extends StatefulWidget {
     this.mainAxisAlignment,
     this.crossAxisAlignment,
     this.contrastLevel = 0.3,
+    this.leftIconPadding,
+    this.rightIconPadding,
+    this.textPadding,
     this.textColor,
     this.borderColor,
     this.backgroundColor,
@@ -93,7 +98,6 @@ class InfoLabel extends StatefulWidget {
     this.rightIcon,
     this.leftIcon,
     this.activeOnHover = true,
-    this.margins,
     this.typeColor = TypeDistributionColor.solidTextContrastBackgroundBorder,
     this.typeInfoLabel = TypeInfoLabel.none,
   });
@@ -127,21 +131,24 @@ class _InfoLabelState extends State<InfoLabel> {
           border: Border.all(
               color: _typeLabelColor.borderColor ?? Colors.transparent),
         ),
-        child: Padding(
-          padding: widget.margins ?? const EdgeInsets.only(left: 3.5, right: 3.5, bottom: 3.5, top: 3.5),
-          child: Flex(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: widget.mainAxisAlignment ?? MainAxisAlignment.center,
-            crossAxisAlignment: widget.crossAxisAlignment ?? CrossAxisAlignment.start,
-            direction: Axis.horizontal,
-            children: [
-              if (widget.leftIcon != null) widget.leftIcon!,
-              const SizedBox(
-                width: 2,
-              ),
-              Flexible(
-                flex: 1,
-                fit: FlexFit.loose,
+        child: Flex(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: widget.mainAxisAlignment ?? MainAxisAlignment.center,
+          crossAxisAlignment: widget.crossAxisAlignment ?? CrossAxisAlignment.start,
+          direction: Axis.horizontal,
+          children: [
+            if (widget.leftIcon != null) Padding(
+              padding: widget.leftIconPadding ?? const EdgeInsets.all(3.5),
+              child: widget.leftIcon!,
+            ),
+            const SizedBox(
+              width: 2,
+            ),
+            Flexible(
+              flex: 1,
+              fit: FlexFit.loose,
+              child: Padding(
+                padding: widget.textPadding ?? const EdgeInsets.all(3.5),
                 child: Text(
                   widget.text,
                   style: widget.textStyle ??
@@ -152,12 +159,15 @@ class _InfoLabelState extends State<InfoLabel> {
                       ),
                 ),
               ),
-              const SizedBox(
-                width: 2,
-              ),
-              if (widget.rightIcon != null) widget.rightIcon!,
-            ],
-          ),
+            ),
+            const SizedBox(
+              width: 2,
+            ),
+            if (widget.rightIcon != null) Padding(
+              padding: widget.rightIconPadding ?? const EdgeInsets.all(3.5),
+              child: widget.rightIcon!,
+            ),
+          ],
         ),
       ),
     );
