@@ -62,7 +62,7 @@ class InfoLabel extends StatefulWidget {
   final bool activeOnHover;
 
   /// Margins around the content of the label (text and icons).
-  final EdgeInsets margins;
+  final EdgeInsets? margins;
 
   /// Distribution of colors for the label appearance.
   final TypeDistributionColor typeColor;
@@ -93,8 +93,7 @@ class InfoLabel extends StatefulWidget {
     this.rightIcon,
     this.leftIcon,
     this.activeOnHover = true,
-    this.margins =
-        const EdgeInsets.only(left: 3.5, right: 3.5, bottom: 0, top: 0),
+    this.margins,
     this.typeColor = TypeDistributionColor.solidTextContrastBackgroundBorder,
     this.typeInfoLabel = TypeInfoLabel.none,
   });
@@ -129,7 +128,7 @@ class _InfoLabelState extends State<InfoLabel> {
               color: _typeLabelColor.borderColor ?? Colors.transparent),
         ),
         child: Padding(
-          padding: widget.margins,
+          padding: widget.margins ?? const EdgeInsets.only(left: 3.5, right: 3.5, bottom: 3.5, top: 3.5),
           child: Flex(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: widget.mainAxisAlignment ?? MainAxisAlignment.center,
