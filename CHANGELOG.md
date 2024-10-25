@@ -1,5 +1,8 @@
 # info_label
 
+## Version 1.1.1
+- **Update green color**
+
 ## Version 1.1.0
 - **Remove global margin**
 - **User margin for icons and content**
