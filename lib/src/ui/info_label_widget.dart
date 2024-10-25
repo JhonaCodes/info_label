@@ -229,7 +229,7 @@ mixin _ColorByTypeInfo {
   ///
   /// If the provided TypeInfoLabel is not recognized, it returns a default color (Color(0xFFA8A8A8)).
   static Color get(TypeInfoLabel type) => switch (type) {
-        TypeInfoLabel.success => const Color(0xFF2ecc71),
+        TypeInfoLabel.success => const Color(0xff00501F),
         TypeInfoLabel.error => const Color(0xFFe74c3c),
         TypeInfoLabel.neutral => const Color(0xFF284b63),
         TypeInfoLabel.warning => const Color(0xFFf39c12),
