@@ -1,5 +1,8 @@
 # info_label
 
+## Version 1.1.2
+- **Fix dev imports**
+
 ## Version 1.1.1
 - **Update green color**
 
