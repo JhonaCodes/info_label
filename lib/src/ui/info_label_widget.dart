@@ -89,8 +89,8 @@ class InfoLabel extends StatefulWidget {
   /// Creates a new instance of [InfoLabel].
   const InfoLabel(
       {super.key,
-        this.text,
-        this.titleWidget,
+      this.text,
+      this.titleWidget,
       this.mainAxisAlignment,
       this.crossAxisAlignment,
       this.contrastLevel = 0.3,
@@ -112,9 +112,8 @@ class InfoLabel extends StatefulWidget {
       this.typeInfoLabel = TypeInfoLabel.none,
       this.msg,
       this.msgPadding,
-      this.isTextAdaptive = true}):assert(
-  !(text != null && titleWidget != null),
-  '''\n
+      this.isTextAdaptive = true})
+      : assert(!(text != null && titleWidget != null), '''\n
 ╔═ASSERTION ERROR 
 ║ Choose one property:                
 ║ • text                                                         
@@ -138,8 +137,7 @@ class InfoLabel extends StatefulWidget {
 ║ text: $text                                                    
 ║ titleWidget: $titleWidget                                                               
 ╚═
-'''
-  );
+''');
 
   @override
   State<InfoLabel> createState() => _InfoLabelState();
@@ -199,16 +197,20 @@ class _InfoLabelState extends State<InfoLabel> {
                   child: Padding(
                     padding: widget.textPadding ??
                         const EdgeInsets.only(left: 1.75, right: 1.75),
-                    child: (widget.msg != null && (widget.text == null || widget.titleWidget == null)) ? widget.msg! : widget.titleWidget ?? Text(
-                      widget.text!,
-                      style: widget.textStyle ??
-                          TextStyle(
-                            color:
-                                widget.globalColor ?? _typeLabelColor.textColor,
-                            fontSize: widget.fontSize,
-                            fontWeight: FontWeight.w500,
-                          ),
-                    ),
+                    child: (widget.msg != null &&
+                            (widget.text == null || widget.titleWidget == null))
+                        ? widget.msg!
+                        : widget.titleWidget ??
+                            Text(
+                              widget.text!,
+                              style: widget.textStyle ??
+                                  TextStyle(
+                                    color: widget.globalColor ??
+                                        _typeLabelColor.textColor,
+                                    fontSize: widget.fontSize,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                            ),
                   ),
                 ),
                 const SizedBox(
@@ -223,7 +225,8 @@ class _InfoLabelState extends State<InfoLabel> {
                   ),
               ],
             ),
-            if (widget.msg != null && (widget.text != null || widget.titleWidget != null))
+            if (widget.msg != null &&
+                (widget.text != null || widget.titleWidget != null))
               Padding(
                 padding: widget.msgPadding ??
                     const EdgeInsets.only(left: 5, right: 5, bottom: 5),
