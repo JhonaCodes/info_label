@@ -62,7 +62,7 @@ class DistributionColor {
   /// This configuration sets a solid color for the label's border and text,
   /// while ensuring a contrasting color for the background, enhancing readability.
   DistributionColor get _solidBorderTextContrastBackground => DistributionColor(
-        backgroundColor: backgroundColor.withOpacity(contrastLevel),
+        backgroundColor: backgroundColor.withValues(alpha: contrastLevel),
         borderColor: borderColor,
         contrastLevel: contrastLevel,
         textColor: textColor,
@@ -74,7 +74,7 @@ class DistributionColor {
   /// while ensuring a contrasting color for the border, enhancing visibility.
   DistributionColor get _solidBackgroundTextContrastBorder => DistributionColor(
         backgroundColor: backgroundColor,
-        borderColor: borderColor?.withOpacity(contrastLevel),
+        borderColor: borderColor?.withValues(alpha: contrastLevel),
         contrastLevel: contrastLevel,
         textColor: textColor ?? Colors.white,
       );
@@ -87,7 +87,7 @@ class DistributionColor {
         backgroundColor: backgroundColor,
         borderColor: borderColor,
         contrastLevel: contrastLevel,
-        textColor: textColor?.withOpacity(contrastLevel) ?? Colors.white,
+        textColor: textColor?.withValues(alpha: contrastLevel) ?? Colors.white,
       );
 
   /// Retrieves a new instance of [DistributionColor] with solid text, contrast background border.
@@ -95,7 +95,7 @@ class DistributionColor {
   /// This configuration sets a solid color for the label's text,
   /// while ensuring contrasting colors for the background and border, optimizing readability.
   DistributionColor get _solidTextContrastBackgroundBorder => DistributionColor(
-        backgroundColor: backgroundColor.withOpacity(contrastLevel),
+        backgroundColor: backgroundColor.withValues(alpha: contrastLevel),
         contrastLevel: contrastLevel,
         textColor: textColor ?? backgroundColor,
       );
@@ -105,10 +105,10 @@ class DistributionColor {
   /// In a full contrast configuration, contrasting colors are applied to the label's
   /// text, background, and border, maximizing visibility and readability.
   DistributionColor get _fullContrast => DistributionColor(
-        backgroundColor: backgroundColor.withOpacity(contrastLevel),
-        borderColor: borderColor?.withOpacity(contrastLevel),
+        backgroundColor: backgroundColor.withValues(alpha: contrastLevel),
+        borderColor: borderColor?.withValues(alpha: contrastLevel),
         contrastLevel: contrastLevel,
-        textColor: textColor?.withOpacity(contrastLevel) ?? Colors.white,
+        textColor: textColor?.withValues(alpha: contrastLevel) ?? Colors.white,
       );
 
   /// Returns a new instance of [DistributionColor] based on the specified [typeColor].

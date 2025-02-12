@@ -53,10 +53,10 @@ class InfoLabel extends StatefulWidget {
   final double roundedCorners;
 
   /// Optional icon on the right side of the label.
-  final Icon? rightIcon;
+  final Widget? rightIcon;
 
   /// Optional icon on the left side of the label.
-  final Icon? leftIcon;
+  final Widget? leftIcon;
 
   /// Indicates whether hover functionality is enabled.
   final bool activeOnHover;
@@ -78,30 +78,38 @@ class InfoLabel extends StatefulWidget {
 
   final EdgeInsetsGeometry? textPadding;
 
+  final Widget? msg;
+
+  final EdgeInsets? msgPadding;
+
+  final bool isTextAdaptive;
+
   /// Creates a new instance of [InfoLabel].
-  const InfoLabel({
-    super.key,
-    required this.text,
-    this.mainAxisAlignment,
-    this.crossAxisAlignment,
-    this.contrastLevel = 0.3,
-    this.leftIconPadding,
-    this.rightIconPadding,
-    this.textPadding,
-    this.textColor,
-    this.borderColor,
-    this.backgroundColor,
-    this.onHoverColor,
-    this.globalColor,
-    this.textStyle,
-    this.fontSize,
-    this.roundedCorners = 5.0,
-    this.rightIcon,
-    this.leftIcon,
-    this.activeOnHover = true,
-    this.typeColor = TypeDistributionColor.solidTextContrastBackgroundBorder,
-    this.typeInfoLabel = TypeInfoLabel.none,
-  });
+  const InfoLabel(
+      {super.key,
+      required this.text,
+      this.mainAxisAlignment,
+      this.crossAxisAlignment,
+      this.contrastLevel = 0.3,
+      this.leftIconPadding,
+      this.rightIconPadding,
+      this.textPadding,
+      this.textColor,
+      this.borderColor,
+      this.backgroundColor,
+      this.onHoverColor,
+      this.globalColor,
+      this.textStyle,
+      this.fontSize,
+      this.roundedCorners = 3.0,
+      this.rightIcon,
+      this.leftIcon,
+      this.activeOnHover = true,
+      this.typeColor = TypeDistributionColor.solidTextContrastBackgroundBorder,
+      this.typeInfoLabel = TypeInfoLabel.none,
+      this.msg,
+      this.msgPadding,
+      this.isTextAdaptive = true});
 
   @override
   State<InfoLabel> createState() => _InfoLabelState();
@@ -132,47 +140,64 @@ class _InfoLabelState extends State<InfoLabel> {
           border: Border.all(
               color: _typeLabelColor.borderColor ?? Colors.transparent),
         ),
-        child: Flex(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment:
-              widget.mainAxisAlignment ?? MainAxisAlignment.center,
-          crossAxisAlignment:
-              widget.crossAxisAlignment ?? CrossAxisAlignment.start,
-          direction: Axis.horizontal,
           children: [
-            if (widget.leftIcon != null)
-              Padding(
-                padding: widget.leftIconPadding ??
-                    const EdgeInsets.only(top: 3.0, left: 3.0),
-                child: widget.leftIcon!,
-              ),
-            const SizedBox(
-              width: 2,
-            ),
-            Flexible(
-              flex: 1,
-              fit: FlexFit.loose,
-              child: Padding(
-                padding: widget.textPadding ?? const EdgeInsets.all(1.75),
-                child: Text(
-                  widget.text,
-                  style: widget.textStyle ??
-                      TextStyle(
-                        color: widget.globalColor ?? _typeLabelColor.textColor,
-                        fontSize: widget.fontSize,
-                        fontWeight: FontWeight.w500,
-                      ),
+            Flex(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment:
+                  widget.mainAxisAlignment ?? MainAxisAlignment.center,
+              crossAxisAlignment:
+                  widget.crossAxisAlignment ?? CrossAxisAlignment.center,
+              direction: Axis.horizontal,
+              children: [
+                if (widget.leftIcon != null)
+                  Padding(
+                    padding: widget.leftIconPadding ??
+                        const EdgeInsets.only(
+                            left: 1.75, bottom: 1.75, top: 1.75),
+                    child: widget.leftIcon!,
+                  ),
+                const SizedBox(
+                  width: 1.75,
                 ),
-              ),
+                Flexible(
+                  flex: 1,
+                  fit: widget.isTextAdaptive ? FlexFit.loose : FlexFit.tight,
+                  child: Padding(
+                    padding: widget.textPadding ??
+                        const EdgeInsets.only(left: 1.75, right: 1.75),
+                    child: Text(
+                      widget.text,
+                      style: widget.textStyle ??
+                          TextStyle(
+                            color:
+                                widget.globalColor ?? _typeLabelColor.textColor,
+                            fontSize: widget.fontSize,
+                            fontWeight: FontWeight.w500,
+                          ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 1.75,
+                ),
+                if (widget.rightIcon != null)
+                  Padding(
+                    padding: widget.rightIconPadding ??
+                        const EdgeInsets.only(
+                            right: 1.75, bottom: 1.75, top: 1.75),
+                    child: widget.rightIcon!,
+                  ),
+              ],
             ),
-            const SizedBox(
-              width: 2,
-            ),
-            if (widget.rightIcon != null)
+            if (widget.msg != null)
               Padding(
-                padding: widget.rightIconPadding ??
-                    const EdgeInsets.only(top: 3.0, right: 3.0),
-                child: widget.rightIcon!,
+                padding: widget.msgPadding ??
+                    const EdgeInsets.only(left: 5, right: 5, bottom: 5),
+                child: widget.msg!,
               ),
           ],
         ),
@@ -209,7 +234,7 @@ class _InfoLabelState extends State<InfoLabel> {
   Color? get _colorOnHover {
     if (_isHovered) {
       return widget.onHoverColor ??
-          widget.globalColor?.withOpacity(widget.contrastLevel);
+          widget.globalColor?.withValues(alpha: widget.contrastLevel);
     }
 
     return _typeLabelColor.backgroundColor;

@@ -1,5 +1,32 @@
 # info_label
 
+## Version 1.2.0
+
+### New Features
+- **Message Support**: Added `msg` property to display additional descriptive text below the main label
+- **Message Padding**: Introduced `msgPadding` property for custom message spacing control
+- **Adaptive Text**: Added `isTextAdaptive` property for improved text responsiveness
+
+### Improvements
+- **Layout Enhancement**:
+    - Improved margin distribution for better visual consistency
+    - Enhanced spacing between label elements
+    - Optimized alignment of text and icons
+- **Test Coverage**:
+    - Added comprehensive test cases for new features
+    - Expanded golden tests for layout variations
+    - Included responsive layout testing scenarios
+
+### Documentation
+- Updated README with new property examples
+- Added usage examples for message functionality
+- Included layout best practices
+
+### Internal Changes
+- Refactored padding logic for better maintainability
+- Enhanced test infrastructure for golden tests
+- Improved type safety for new properties
+
 ## Version 1.1.2
 - **Fix dev imports**
 
