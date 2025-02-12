@@ -1,6 +1,9 @@
 # info_label
 
-## [1.2.1] - 2025-02-13
+## Version 1.2.2
+  - Changelog format.
+  
+## Version 1.2.1
 
 ### Added
 - Support for using either titleWidget or text in the InfoLabel's upper section
