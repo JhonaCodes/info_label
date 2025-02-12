@@ -1,7 +1,7 @@
 # info_label
 
 ## Version 1.2.2
-  - Changelog format.
+- Changelog format.
   
 ## Version 1.2.1
 
