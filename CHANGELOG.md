@@ -1,5 +1,8 @@
 # info_label
 
+## Version 1.2.3
+- Improve validation, title, text, etc.
+
 ## Version 1.2.2
 - Changelog format.
   

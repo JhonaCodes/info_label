@@ -198,7 +198,7 @@ class _InfoLabelState extends State<InfoLabel> {
                     padding: widget.textPadding ??
                         const EdgeInsets.only(left: 1.75, right: 1.75),
                     child: (widget.msg != null &&
-                            (widget.text == null || widget.titleWidget == null))
+                            (widget.text == null && widget.titleWidget == null))
                         ? widget.msg!
                         : widget.titleWidget ??
                             Text(
