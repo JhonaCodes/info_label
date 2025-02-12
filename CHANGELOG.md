@@ -1,5 +1,19 @@
 # info_label
 
+## [1.2.1] - 2025-02-13
+
+### Added
+- Support for using either titleWidget or text in the InfoLabel's upper section
+- New functionality that allows using message as title when no text is defined
+
+### Changed
+- Improved rendering logic to maintain consistent alignment
+- Optimized handling of cases when only message is provided
+
+### Notes
+- Existing implementations using text and msg remain compatible
+- This update enhances widget flexibility while maintaining backward compatibility
+
 ## Version 1.2.0
 
 ### New Features

@@ -19,7 +19,9 @@ import 'package:info_label/src/core/type_info_label.dart';
 /// ```
 class InfoLabel extends StatefulWidget {
   /// The text to be displayed on the label.
-  final String text;
+  final String? text;
+
+  final Widget? titleWidget;
 
   /// Text color.
   final Color? textColor;
@@ -87,7 +89,8 @@ class InfoLabel extends StatefulWidget {
   /// Creates a new instance of [InfoLabel].
   const InfoLabel(
       {super.key,
-      required this.text,
+        this.text,
+        this.titleWidget,
       this.mainAxisAlignment,
       this.crossAxisAlignment,
       this.contrastLevel = 0.3,
@@ -109,7 +112,34 @@ class InfoLabel extends StatefulWidget {
       this.typeInfoLabel = TypeInfoLabel.none,
       this.msg,
       this.msgPadding,
-      this.isTextAdaptive = true});
+      this.isTextAdaptive = true}):assert(
+  !(text != null && titleWidget != null),
+  '''\n
+╔═ASSERTION ERROR 
+║ Choose one property:                
+║ • text                                                         
+║ • titleWidget                                                  
+║                                                                
+║ Cannot use both.                       
+║                                                                
+║ 📝 Correct usage:                                    
+║                                                                
+║ // Option 1                                        
+║ InfoLabel(                                                     
+║   text: "Label",                                                              
+║ )                                                             
+║                                                                
+║ // Option 2                                 
+║ InfoLabel(                                                     
+║   titleWidget: Text("Label"),                         
+║ )                                                             
+║                                                                
+║ ❌ Found:                                             
+║ text: $text                                                    
+║ titleWidget: $titleWidget                                                               
+╚═
+'''
+  );
 
   @override
   State<InfoLabel> createState() => _InfoLabelState();
@@ -169,8 +199,8 @@ class _InfoLabelState extends State<InfoLabel> {
                   child: Padding(
                     padding: widget.textPadding ??
                         const EdgeInsets.only(left: 1.75, right: 1.75),
-                    child: Text(
-                      widget.text,
+                    child: (widget.msg != null && (widget.text == null || widget.titleWidget == null)) ? widget.msg! : widget.titleWidget ?? Text(
+                      widget.text!,
                       style: widget.textStyle ??
                           TextStyle(
                             color:
@@ -193,7 +223,7 @@ class _InfoLabelState extends State<InfoLabel> {
                   ),
               ],
             ),
-            if (widget.msg != null)
+            if (widget.msg != null && (widget.text != null || widget.titleWidget != null))
               Padding(
                 padding: widget.msgPadding ??
                     const EdgeInsets.only(left: 5, right: 5, bottom: 5),
