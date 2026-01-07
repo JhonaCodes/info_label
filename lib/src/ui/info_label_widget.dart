@@ -268,7 +268,7 @@ class _InfoLabelState extends State<InfoLabel> {
   Color get _colorType => _ColorByTypeInfo.get(widget.typeInfoLabel);
 
   /// Validate if is onHover
-  void _onHoverAction(_) =>
+  void _onHoverAction(PointerEvent _) =>
       widget.activeOnHover ? setState(() => _isHovered = !_isHovered) : null;
 
   /// Return color for onHover
