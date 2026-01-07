@@ -1,5 +1,8 @@
 # info_label
 
+## Version 1.2.4
+- activeOnHover defaults to false.
+
 ## Version 1.2.3
 - Improve validation, title, text, etc.
 

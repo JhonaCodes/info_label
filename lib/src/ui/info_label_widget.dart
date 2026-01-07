@@ -107,7 +107,7 @@ class InfoLabel extends StatefulWidget {
       this.roundedCorners = 3.0,
       this.rightIcon,
       this.leftIcon,
-      this.activeOnHover = true,
+      this.activeOnHover = false,
       this.typeColor = TypeDistributionColor.solidTextContrastBackgroundBorder,
       this.typeInfoLabel = TypeInfoLabel.none,
       this.msg,
