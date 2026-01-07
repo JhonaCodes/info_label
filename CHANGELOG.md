@@ -1,5 +1,10 @@
 # info_label
 
+## Version 1.3.0
+- Updated Dart SDK constraint to ^3.10.0.
+- Fixed lint warning: added type annotation to `_onHoverAction` parameter.
+- Fixed golden tests CI variant configuration.
+
 ## Version 1.2.4
 - activeOnHover defaults to false.
 

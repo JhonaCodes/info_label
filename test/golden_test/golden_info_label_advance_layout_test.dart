@@ -178,8 +178,8 @@ final List<GoldenTestScenario> goldenAdvancedTest = [
 ];
 
 void main() => runGoldenTest(
-      goldenAdvancedTest,
-      groupData: "INFO_LABEL_ADVANCED_LAYOUT_TEST",
-      goldenName: 'Info Labels with Advanced Layouts',
-      fileName: 'golden_info_advanced_layout_test',
-    );
+  goldenAdvancedTest,
+  groupData: "INFO_LABEL_ADVANCED_LAYOUT_TEST",
+  goldenName: 'Info Labels with Advanced Layouts',
+  fileName: 'golden_info_advanced_layout_test',
+);

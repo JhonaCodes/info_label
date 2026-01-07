@@ -29,3 +29,4 @@ migrate_working_dir/
 build/
 /example/app/
 /test/golden_test/goldens/ci/
+/test/golden_test/failures/

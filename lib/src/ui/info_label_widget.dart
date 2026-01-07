@@ -87,33 +87,33 @@ class InfoLabel extends StatefulWidget {
   final bool isTextAdaptive;
 
   /// Creates a new instance of [InfoLabel].
-  const InfoLabel(
-      {super.key,
-      this.text,
-      this.titleWidget,
-      this.mainAxisAlignment,
-      this.crossAxisAlignment,
-      this.contrastLevel = 0.3,
-      this.leftIconPadding,
-      this.rightIconPadding,
-      this.textPadding,
-      this.textColor,
-      this.borderColor,
-      this.backgroundColor,
-      this.onHoverColor,
-      this.globalColor,
-      this.textStyle,
-      this.fontSize,
-      this.roundedCorners = 3.0,
-      this.rightIcon,
-      this.leftIcon,
-      this.activeOnHover = false,
-      this.typeColor = TypeDistributionColor.solidTextContrastBackgroundBorder,
-      this.typeInfoLabel = TypeInfoLabel.none,
-      this.msg,
-      this.msgPadding,
-      this.isTextAdaptive = true})
-      : assert(!(text != null && titleWidget != null), '''\n
+  const InfoLabel({
+    super.key,
+    this.text,
+    this.titleWidget,
+    this.mainAxisAlignment,
+    this.crossAxisAlignment,
+    this.contrastLevel = 0.3,
+    this.leftIconPadding,
+    this.rightIconPadding,
+    this.textPadding,
+    this.textColor,
+    this.borderColor,
+    this.backgroundColor,
+    this.onHoverColor,
+    this.globalColor,
+    this.textStyle,
+    this.fontSize,
+    this.roundedCorners = 3.0,
+    this.rightIcon,
+    this.leftIcon,
+    this.activeOnHover = false,
+    this.typeColor = TypeDistributionColor.solidTextContrastBackgroundBorder,
+    this.typeInfoLabel = TypeInfoLabel.none,
+    this.msg,
+    this.msgPadding,
+    this.isTextAdaptive = true,
+  }) : assert(!(text != null && titleWidget != null), '''\n
 ╔═ASSERTION ERROR 
 ║ Choose one property:                
 ║ • text                                                         
@@ -166,61 +166,68 @@ class _InfoLabelState extends State<InfoLabel> {
           borderRadius: BorderRadius.circular(widget.roundedCorners),
           color: _colorOnHover,
           border: Border.all(
-              color: _typeLabelColor.borderColor ?? Colors.transparent),
+            color: _typeLabelColor.borderColor ?? Colors.transparent,
+          ),
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: .start,
+          mainAxisAlignment: .start,
+          mainAxisSize: .min,
           children: [
             Flex(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment:
-                  widget.mainAxisAlignment ?? MainAxisAlignment.center,
-              crossAxisAlignment:
-                  widget.crossAxisAlignment ?? CrossAxisAlignment.center,
-              direction: Axis.horizontal,
+              mainAxisSize: .min,
+              mainAxisAlignment: widget.mainAxisAlignment ?? .center,
+              crossAxisAlignment: widget.crossAxisAlignment ?? .center,
+              direction: .horizontal,
               children: [
                 if (widget.leftIcon != null)
                   Padding(
-                    padding: widget.leftIconPadding ??
+                    padding:
+                        widget.leftIconPadding ??
                         const EdgeInsets.only(
-                            left: 1.75, bottom: 1.75, top: 1.75),
+                          left: 1.75,
+                          bottom: 1.75,
+                          top: 1.75,
+                        ),
                     child: widget.leftIcon!,
                   ),
-                const SizedBox(
-                  width: 1.75,
-                ),
+                const SizedBox(width: 1.75),
                 Flexible(
                   flex: 1,
-                  fit: widget.isTextAdaptive ? FlexFit.loose : FlexFit.tight,
+                  fit: widget.isTextAdaptive ? .loose : .tight,
                   child: Padding(
-                    padding: widget.textPadding ??
+                    padding:
+                        widget.textPadding ??
                         const EdgeInsets.only(left: 1.75, right: 1.75),
-                    child: (widget.msg != null &&
+                    child:
+                        (widget.msg != null &&
                             (widget.text == null && widget.titleWidget == null))
                         ? widget.msg!
                         : widget.titleWidget ??
-                            Text(
-                              widget.text!,
-                              style: widget.textStyle ??
-                                  TextStyle(
-                                    color: widget.globalColor ??
-                                        _typeLabelColor.textColor,
-                                    fontSize: widget.fontSize,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                            ),
+                              Text(
+                                widget.text!,
+                                style:
+                                    widget.textStyle ??
+                                    TextStyle(
+                                      color:
+                                          widget.globalColor ??
+                                          _typeLabelColor.textColor,
+                                      fontSize: widget.fontSize,
+                                      fontWeight: .w500,
+                                    ),
+                              ),
                   ),
                 ),
-                const SizedBox(
-                  width: 1.75,
-                ),
+                const SizedBox(width: 1.75),
                 if (widget.rightIcon != null)
                   Padding(
-                    padding: widget.rightIconPadding ??
+                    padding:
+                        widget.rightIconPadding ??
                         const EdgeInsets.only(
-                            right: 1.75, bottom: 1.75, top: 1.75),
+                          right: 1.75,
+                          bottom: 1.75,
+                          top: 1.75,
+                        ),
                     child: widget.rightIcon!,
                   ),
               ],
@@ -228,7 +235,8 @@ class _InfoLabelState extends State<InfoLabel> {
             if (widget.msg != null &&
                 (widget.text != null || widget.titleWidget != null))
               Padding(
-                padding: widget.msgPadding ??
+                padding:
+                    widget.msgPadding ??
                     const EdgeInsets.only(left: 5, right: 5, bottom: 5),
                 child: widget.msg!,
               ),
@@ -260,7 +268,7 @@ class _InfoLabelState extends State<InfoLabel> {
   Color get _colorType => _ColorByTypeInfo.get(widget.typeInfoLabel);
 
   /// Validate if is onHover
-  _onHoverAction(_) =>
+  void _onHoverAction(PointerEvent _) =>
       widget.activeOnHover ? setState(() => _isHovered = !_isHovered) : null;
 
   /// Return color for onHover
@@ -287,18 +295,18 @@ mixin _ColorByTypeInfo {
   ///
   /// If the provided TypeInfoLabel is not recognized, it returns a default color (Color(0xFFA8A8A8)).
   static Color get(TypeInfoLabel type) => switch (type) {
-        TypeInfoLabel.success => const Color(0xff00501F),
-        TypeInfoLabel.error => const Color(0xFFe74c3c),
-        TypeInfoLabel.neutral => const Color(0xFF284b63),
-        TypeInfoLabel.warning => const Color(0xFFf39c12),
-        TypeInfoLabel.empty => const Color(0xFFdddddd),
-        TypeInfoLabel.dark => const Color(0xFF000814),
-        TypeInfoLabel.info => const Color(0xFF3498db),
-        TypeInfoLabel.pending => const Color(0xFFf1c40f),
-        TypeInfoLabel.confirmed => const Color(0xFF40E0D0),
-        TypeInfoLabel.expired => const Color(0xFF663300),
-        TypeInfoLabel.disabled => const Color(0xFF8d99ae),
-        TypeInfoLabel.critical => const Color(0xFF660708),
-        TypeInfoLabel.none => const Color(0xFFA8A8A8),
-      };
+    TypeInfoLabel.success => const Color(0xff00501F),
+    TypeInfoLabel.error => const Color(0xFFe74c3c),
+    TypeInfoLabel.neutral => const Color(0xFF284b63),
+    TypeInfoLabel.warning => const Color(0xFFf39c12),
+    TypeInfoLabel.empty => const Color(0xFFdddddd),
+    TypeInfoLabel.dark => const Color(0xFF000814),
+    TypeInfoLabel.info => const Color(0xFF3498db),
+    TypeInfoLabel.pending => const Color(0xFFf1c40f),
+    TypeInfoLabel.confirmed => const Color(0xFF40E0D0),
+    TypeInfoLabel.expired => const Color(0xFF663300),
+    TypeInfoLabel.disabled => const Color(0xFF8d99ae),
+    TypeInfoLabel.critical => const Color(0xFF660708),
+    TypeInfoLabel.none => const Color(0xFFA8A8A8),
+  };
 }
