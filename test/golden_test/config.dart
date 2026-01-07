@@ -27,9 +27,7 @@ runGoldenTest(
     return AlchemistConfig.runWithConfig(
       config: AlchemistConfig(
         forceUpdateGoldenFiles: true,
-        theme: ThemeData(
-          fontFamily: 'Roboto',
-        ),
+        theme: ThemeData(fontFamily: 'Roboto'),
         goldenTestTheme: GoldenTestTheme(
           backgroundColor: Colors.grey.shade100,
           borderColor: Colors.grey.shade400,
@@ -51,10 +49,13 @@ runGoldenTest(
 
             FlutterError.onError = (FlutterErrorDetails details) {
               final exception = details.exception;
-              final isOverflowError = exception is FlutterError &&
-                  !exception.diagnostics.any((e) => e.value
-                      .toString()
-                      .startsWith("A RenderFlex overflowed by"));
+              final isOverflowError =
+                  exception is FlutterError &&
+                  !exception.diagnostics.any(
+                    (e) => e.value.toString().startsWith(
+                      "A RenderFlex overflowed by",
+                    ),
+                  );
 
               if (isOverflowError && catchOverflows == true) {
                 log("Flutter overflow error is being caught by golden test");
@@ -80,24 +81,22 @@ runGoldenTest(
 class ScenarioWidget extends StatelessWidget {
   final Widget child;
 
-  const ScenarioWidget({
-    super.key,
-    required this.child,
-  });
+  const ScenarioWidget({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
     ThemeData currentTheme = ThemeData.light();
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: DefaultTextStyle(
-          style: currentTheme.textTheme.bodyMedium!,
-          child: child,
-        ));
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: DefaultTextStyle(
+        style: currentTheme.textTheme.bodyMedium!,
+        child: child,
+      ),
+    );
   }
 }

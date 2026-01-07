@@ -51,82 +51,78 @@ class DistributionColor {
   /// In a solid color configuration, the same color is applied to the label's
   /// background, border, and text, ensuring a consistent appearance.
   DistributionColor get _solid => DistributionColor(
-        backgroundColor: backgroundColor,
-        borderColor: borderColor,
-        contrastLevel: 1,
-        textColor: textColor,
-      );
+    backgroundColor: backgroundColor,
+    borderColor: borderColor,
+    contrastLevel: 1,
+    textColor: textColor,
+  );
 
   /// Retrieves a new instance of [DistributionColor] with solid border, text contrast background.
   ///
   /// This configuration sets a solid color for the label's border and text,
   /// while ensuring a contrasting color for the background, enhancing readability.
   DistributionColor get _solidBorderTextContrastBackground => DistributionColor(
-        backgroundColor: backgroundColor.withValues(alpha: contrastLevel),
-        borderColor: borderColor,
-        contrastLevel: contrastLevel,
-        textColor: textColor,
-      );
+    backgroundColor: backgroundColor.withValues(alpha: contrastLevel),
+    borderColor: borderColor,
+    contrastLevel: contrastLevel,
+    textColor: textColor,
+  );
 
   /// Retrieves a new instance of [DistributionColor] with solid background, text contrast border.
   ///
   /// This configuration sets a solid color for the label's background and text,
   /// while ensuring a contrasting color for the border, enhancing visibility.
   DistributionColor get _solidBackgroundTextContrastBorder => DistributionColor(
-        backgroundColor: backgroundColor,
-        borderColor: borderColor?.withValues(alpha: contrastLevel),
-        contrastLevel: contrastLevel,
-        textColor: textColor ?? Colors.white,
-      );
+    backgroundColor: backgroundColor,
+    borderColor: borderColor?.withValues(alpha: contrastLevel),
+    contrastLevel: contrastLevel,
+    textColor: textColor ?? Colors.white,
+  );
 
   /// Retrieves a new instance of [DistributionColor] with solid background, border contrast text.
   ///
   /// This configuration sets a solid color for the label's background and border,
   /// while ensuring a contrasting color for the text, improving legibility.
   DistributionColor get _solidBackgroundBorderContrastText => DistributionColor(
-        backgroundColor: backgroundColor,
-        borderColor: borderColor,
-        contrastLevel: contrastLevel,
-        textColor: textColor?.withValues(alpha: contrastLevel) ?? Colors.white,
-      );
+    backgroundColor: backgroundColor,
+    borderColor: borderColor,
+    contrastLevel: contrastLevel,
+    textColor: textColor?.withValues(alpha: contrastLevel) ?? Colors.white,
+  );
 
   /// Retrieves a new instance of [DistributionColor] with solid text, contrast background border.
   ///
   /// This configuration sets a solid color for the label's text,
   /// while ensuring contrasting colors for the background and border, optimizing readability.
   DistributionColor get _solidTextContrastBackgroundBorder => DistributionColor(
-        backgroundColor: backgroundColor.withValues(alpha: contrastLevel),
-        contrastLevel: contrastLevel,
-        textColor: textColor ?? backgroundColor,
-      );
+    backgroundColor: backgroundColor.withValues(alpha: contrastLevel),
+    contrastLevel: contrastLevel,
+    textColor: textColor ?? backgroundColor,
+  );
 
   /// Retrieves a new instance of [DistributionColor] with full contrast.
   ///
   /// In a full contrast configuration, contrasting colors are applied to the label's
   /// text, background, and border, maximizing visibility and readability.
   DistributionColor get _fullContrast => DistributionColor(
-        backgroundColor: backgroundColor.withValues(alpha: contrastLevel),
-        borderColor: borderColor?.withValues(alpha: contrastLevel),
-        contrastLevel: contrastLevel,
-        textColor: textColor?.withValues(alpha: contrastLevel) ?? Colors.white,
-      );
+    backgroundColor: backgroundColor.withValues(alpha: contrastLevel),
+    borderColor: borderColor?.withValues(alpha: contrastLevel),
+    contrastLevel: contrastLevel,
+    textColor: textColor?.withValues(alpha: contrastLevel) ?? Colors.white,
+  );
 
   /// Returns a new instance of [DistributionColor] based on the specified [typeColor].
   ///
   /// This method selects and returns the appropriate color distribution configuration
   /// based on the provided [typeColor] from the `TypeDistributionColor` enum.
-  DistributionColor labelInfoColors(
-          {required TypeDistributionColor typeColor}) =>
-      switch (typeColor) {
-        TypeDistributionColor.solid => _solid,
-        TypeDistributionColor.solidBackgroundBorderContrastText =>
-          _solidBackgroundBorderContrastText,
-        TypeDistributionColor.solidBackgroundTextContrastBorder =>
-          _solidBackgroundTextContrastBorder,
-        TypeDistributionColor.solidBorderTextContrastBackground =>
-          _solidBorderTextContrastBackground,
-        TypeDistributionColor.solidTextContrastBackgroundBorder =>
-          _solidTextContrastBackgroundBorder,
-        TypeDistributionColor.fullContrast => _fullContrast,
-      };
+  DistributionColor labelInfoColors({
+    required TypeDistributionColor typeColor,
+  }) => switch (typeColor) {
+    .solid => _solid,
+    .solidBackgroundBorderContrastText => _solidBackgroundBorderContrastText,
+    .solidBackgroundTextContrastBorder => _solidBackgroundTextContrastBorder,
+    .solidBorderTextContrastBackground => _solidBorderTextContrastBackground,
+    .solidTextContrastBackgroundBorder => _solidTextContrastBackgroundBorder,
+    .fullContrast => _fullContrast,
+  };
 }

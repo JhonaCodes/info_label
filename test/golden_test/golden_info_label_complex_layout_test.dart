@@ -151,8 +151,8 @@ final List<GoldenTestScenario> goldenIconsTest = [
 ];
 
 void main() => runGoldenTest(
-      goldenIconsTest,
-      groupData: "INFO_LABEL_WITH_ICONS_TEST",
-      goldenName: 'Info Labels with Various Icons',
-      fileName: 'golden_info_complex_layout_test',
-    );
+  goldenIconsTest,
+  groupData: "INFO_LABEL_WITH_ICONS_TEST",
+  goldenName: 'Info Labels with Various Icons',
+  fileName: 'golden_info_complex_layout_test',
+);
