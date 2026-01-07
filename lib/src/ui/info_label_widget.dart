@@ -87,33 +87,33 @@ class InfoLabel extends StatefulWidget {
   final bool isTextAdaptive;
 
   /// Creates a new instance of [InfoLabel].
-  const InfoLabel(
-      {super.key,
-      this.text,
-      this.titleWidget,
-      this.mainAxisAlignment,
-      this.crossAxisAlignment,
-      this.contrastLevel = 0.3,
-      this.leftIconPadding,
-      this.rightIconPadding,
-      this.textPadding,
-      this.textColor,
-      this.borderColor,
-      this.backgroundColor,
-      this.onHoverColor,
-      this.globalColor,
-      this.textStyle,
-      this.fontSize,
-      this.roundedCorners = 3.0,
-      this.rightIcon,
-      this.leftIcon,
-      this.activeOnHover = false,
-      this.typeColor = TypeDistributionColor.solidTextContrastBackgroundBorder,
-      this.typeInfoLabel = TypeInfoLabel.none,
-      this.msg,
-      this.msgPadding,
-      this.isTextAdaptive = true})
-      : assert(!(text != null && titleWidget != null), '''\n
+  const InfoLabel({
+    super.key,
+    this.text,
+    this.titleWidget,
+    this.mainAxisAlignment,
+    this.crossAxisAlignment,
+    this.contrastLevel = 0.3,
+    this.leftIconPadding,
+    this.rightIconPadding,
+    this.textPadding,
+    this.textColor,
+    this.borderColor,
+    this.backgroundColor,
+    this.onHoverColor,
+    this.globalColor,
+    this.textStyle,
+    this.fontSize,
+    this.roundedCorners = 3.0,
+    this.rightIcon,
+    this.leftIcon,
+    this.activeOnHover = false,
+    this.typeColor = TypeDistributionColor.solidTextContrastBackgroundBorder,
+    this.typeInfoLabel = TypeInfoLabel.none,
+    this.msg,
+    this.msgPadding,
+    this.isTextAdaptive = true,
+  }) : assert(!(text != null && titleWidget != null), '''\n
 ╔═ASSERTION ERROR 
 ║ Choose one property:                
 ║ • text                                                         
