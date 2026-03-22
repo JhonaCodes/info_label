@@ -31,3 +31,4 @@ build/
 /test/golden_test/goldens/ci/
 /test/golden_test/failures/
 /.serena/
+/.serena/
