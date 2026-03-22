@@ -275,32 +275,49 @@ class _CompactTextPainter extends CustomPainter {
       text != old.text || textStyle != old.textStyle || size != old.size;
 }
 
-/// Paints a positioned circle indicator with optional centered text.
+/// Paints a positioned overlay indicator on top of the label.
 ///
-/// Used as [CustomPaint.foregroundPainter] to draw on top of the label
-/// content. Replaces [Stack] + [Positioned] with zero extra widgets.
+/// Supports 4 modes based on which params are set:
+/// - **Dot**: `overlayColor` only → solid circle, no text.
+/// - **Badge**: `overlayColor` + `overlayText` → circle/pill with centered text.
+/// - **Text only**: `overlayText` without `overlayColor` → just the number/text.
+/// - **Badge with border**: add `borderColor` for a bordered indicator.
 ///
-/// Position is computed relative to the parent [Size] using
-/// [top], [right], [bottom], [left]. The circle can extend beyond
-/// parent bounds (no clipping).
+/// For multi-character text (e.g. "99+"), the shape automatically
+/// expands from a circle to a rounded pill to fit the content.
+///
+/// Used as [CustomPaint.foregroundPainter] — zero extra widgets.
 class _OverlayPainter extends CustomPainter {
-  final Color color;
+  final Color? color;
+  final Color? borderColor;
   final double overlaySize;
   final String? text;
-  final Color? textColor;
+
+  /// Fully resolved text style including fontFamily.
+  /// Built outside the painter (in widget build) so it inherits
+  /// the correct font from the theme/context.
+  final TextStyle? textStyle;
+
   final double? top;
   final double? right;
   final double? bottom;
   final double? left;
 
-  final Paint _circlePaint = Paint()..style = PaintingStyle.fill;
+  final Paint _fillPaint = Paint()
+    ..style = PaintingStyle.fill
+    ..isAntiAlias = true;
+  final Paint _borderPaint = Paint()
+    ..style = PaintingStyle.stroke
+    ..strokeWidth = 1.0
+    ..isAntiAlias = true;
   TextPainter? _tp;
 
   _OverlayPainter({
-    required this.color,
+    this.color,
+    this.borderColor,
     required this.overlaySize,
     this.text,
-    this.textColor,
+    this.textStyle,
     this.top,
     this.right,
     this.bottom,
@@ -309,73 +326,88 @@ class _OverlayPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final radius = overlaySize / 2;
+    final halfH = overlaySize / 2;
 
-    // Compute center position relative to parent bounds.
-    // Priority: right > left for horizontal, top > bottom for vertical.
+    // ── Position: anchor point (center of the overlay) ──
     double cx = 0;
     double cy = 0;
-
     if (right != null) {
-      cx = size.width - right! - radius;
+      cx = size.width - right! - halfH;
     } else if (left != null) {
-      cx = left! + radius;
+      cx = left! + halfH;
     }
-
     if (top != null) {
-      cy = top! + radius;
+      cy = top! + halfH;
     } else if (bottom != null) {
-      cy = size.height - bottom! - radius;
+      cy = size.height - bottom! - halfH;
     }
 
-    // Circle indicator
-    _circlePaint.color = color;
-    canvas.drawCircle(Offset(cx, cy), radius, _circlePaint);
-
-    // Optional text centered inside the circle
-    if (text != null && text!.isNotEmpty) {
+    // ── Measure text (if any) to determine shape width ──
+    double shapeW = overlaySize;
+    if (text != null && text!.isNotEmpty && textStyle != null) {
       _tp ??= TextPainter(
-        text: TextSpan(
-          text: text,
-          style: TextStyle(
-            color: textColor ?? Colors.white,
-            fontSize: overlaySize * 0.6,
-            fontWeight: FontWeight.w600,
-            height: 1.0,
-          ),
-        ),
+        text: TextSpan(text: text, style: textStyle),
         textDirection: TextDirection.ltr,
         maxLines: 1,
       );
       _tp!.layout();
 
+      // Expand width to fit text + horizontal padding when text is wide.
+      final textPad = overlaySize * 0.4;
+      if (_tp!.width + textPad > overlaySize) {
+        shapeW = _tp!.width + textPad;
+      }
+    }
+
+    // ── Shape rect centered on (cx, cy) ──
+    final shapeRect = Rect.fromCenter(
+      center: Offset(cx, cy),
+      width: shapeW,
+      height: overlaySize,
+    );
+    final rrect = RRect.fromRectAndRadius(
+      shapeRect,
+      Radius.circular(halfH),
+    );
+
+    // ── Fill background (dot or badge) ──
+    if (color != null) {
+      _fillPaint.color = color!;
+      canvas.drawRRect(rrect, _fillPaint);
+    }
+
+    // ── Border ──
+    if (borderColor != null) {
+      _borderPaint.color = borderColor!;
+      canvas.drawRRect(rrect.deflate(0.5), _borderPaint);
+    }
+
+    // ── Text centered inside the shape ──
+    if (_tp != null) {
       final textDx = cx - _tp!.width / 2;
       final textDy = cy - _tp!.height / 2;
       _tp!.paint(canvas, Offset(textDx, textDy));
     }
   }
 
-  /// Determines if the overlay indicator needs to be repainted.
+  /// Determines if the overlay needs to be repainted.
   ///
   /// Checks two independent concerns:
-  /// - **Appearance**: circle color, size, or text content changed.
+  /// - **Appearance**: fill, border, size, or text content changed.
   /// - **Position**: the overlay moved to a different location.
   @override
   bool shouldRepaint(covariant _OverlayPainter old) =>
       _appearanceChanged(old) || _positionChanged(old);
 
   /// Returns `true` if the visual appearance of the indicator differs.
-  ///
-  /// Covers the circle fill color, diameter, and the text/number
-  /// displayed inside it.
   bool _appearanceChanged(_OverlayPainter old) =>
       color != old.color ||
+      borderColor != old.borderColor ||
       overlaySize != old.overlaySize ||
       text != old.text ||
-      textColor != old.textColor;
+      textStyle != old.textStyle;
 
-  /// Returns `true` if the indicator moved to a different position
-  /// relative to the parent label bounds.
+  /// Returns `true` if the indicator moved to a different position.
   bool _positionChanged(_OverlayPainter old) =>
       top != old.top ||
       right != old.right ||

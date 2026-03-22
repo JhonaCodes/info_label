@@ -116,19 +116,25 @@ class InfoLabel extends StatelessWidget {
 
   final bool isTextAdaptive;
 
-  /// Overlay indicator circle color.
+  /// Overlay indicator fill color.
   ///
-  /// When non-null, a circle is painted on top of the label
-  /// at [overlayTop], [overlayRight], [overlayBottom], [overlayLeft].
+  /// When non-null, paints a circle/pill background on top of the label.
+  /// Combine with [overlayText] for a badge with number.
+  /// Use [overlayText] alone (without this) for text-only overlay.
   final Color? overlayColor;
 
-  /// Overlay indicator circle diameter.
+  /// Overlay indicator border color.
+  final Color? overlayBorderColor;
+
+  /// Overlay indicator height (and min width). For multi-character text,
+  /// the width expands automatically to fit.
   final double overlaySize;
 
-  /// Text/number inside the overlay circle.
+  /// Text/number inside the overlay. Can be used with or without
+  /// [overlayColor]. Without color, renders as standalone text.
   final String? overlayText;
 
-  /// Text color inside the overlay circle.
+  /// Text color inside the overlay.
   final Color? overlayTextColor;
 
   /// Overlay position from the top edge.
@@ -176,6 +182,7 @@ class InfoLabel extends StatelessWidget {
     this.msgPadding,
     this.isTextAdaptive = true,
     this.overlayColor,
+    this.overlayBorderColor,
     this.overlaySize = 8.0,
     this.overlayText,
     this.overlayTextColor,
@@ -238,36 +245,56 @@ class InfoLabel extends StatelessWidget {
   );
 
   /// Returns an [_OverlayPainter] if overlay is configured, `null` otherwise.
-  _OverlayPainter? get _overlayPainter => overlayColor != null
-      ? _OverlayPainter(
-          color: overlayColor!,
-          overlaySize: overlaySize,
-          text: overlayText,
-          textColor: overlayTextColor,
-          top: overlayTop,
-          right: overlayRight,
-          bottom: overlayBottom,
-          left: overlayLeft,
-        )
-      : null;
+  /// Builds the [_OverlayPainter] with a resolved [TextStyle] that
+  /// inherits the fontFamily from the current theme, so TextPainter
+  /// renders correctly in both production and golden tests.
+  _OverlayPainter? _buildOverlayPainter(BuildContext context) {
+    if (overlayColor == null && overlayText == null) return null;
+
+    final fontFamily = DefaultTextStyle.of(context).style.fontFamily;
+
+    return _OverlayPainter(
+      color: overlayColor,
+      borderColor: overlayBorderColor,
+      overlaySize: overlaySize,
+      text: overlayText,
+      textStyle: overlayText != null
+          ? TextStyle(
+              color: overlayTextColor ??
+                  (overlayColor != null ? Colors.white : Colors.black87),
+              fontSize: overlaySize * 0.55,
+              fontWeight: FontWeight.w600,
+              fontFamily: fontFamily,
+              height: 1.0,
+            )
+          : null,
+      top: overlayTop,
+      right: overlayRight,
+      bottom: overlayBottom,
+      left: overlayLeft,
+    );
+  }
 
   @override
-  Widget build(BuildContext context) =>
-      switch ((activeOnHover, compactSize != null)) {
+  Widget build(BuildContext context) {
+    final overlay = _buildOverlayPainter(context);
+
+    return switch ((activeOnHover, compactSize != null)) {
     (true, _) => _HoverInfoLabel(
       data: _data,
       compactSize: compactSize,
       onHoverColor: onHoverColor,
-      overlayPainter: _overlayPainter,
+      overlayPainter: overlay,
     ),
     (false, true) => _CompactInfoLabel(
       data: _data,
       size: compactSize!,
-      overlayPainter: _overlayPainter,
+      overlayPainter: overlay,
     ),
     (false, false) => _BaseInfoLabel(
       data: _data,
-      overlayPainter: _overlayPainter,
+      overlayPainter: overlay,
     ),
   };
+  }
 }
