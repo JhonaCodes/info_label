@@ -35,10 +35,7 @@ class _CompactInfoLabel extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(size * 0.12),
             child: Center(
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: data.titleWidget!,
-              ),
+              child: FittedBox(fit: BoxFit.scaleDown, child: data.titleWidget!),
             ),
           ),
         ),
@@ -57,7 +54,8 @@ class _CompactInfoLabel extends StatelessWidget {
             roundedCorners: data.roundedCorners,
             smoothCorners: data.smoothCorners,
             text: data.text ?? '',
-            textStyle: data.textStyle ??
+            textStyle:
+                data.textStyle ??
                 TextStyle(
                   color: data.globalColor ?? labelColor.textColor,
                   fontSize: size * 0.55,

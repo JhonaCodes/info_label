@@ -4,7 +4,9 @@ import 'package:info_label/info_label.dart';
 
 /// Tests for the assertion that text and titleWidget are mutually exclusive.
 void main() {
-  testWidgets('throws when both text and titleWidget are provided', (tester) async {
+  testWidgets('throws when both text and titleWidget are provided', (
+    tester,
+  ) async {
     expect(
       () => InfoLabel(
         text: 'Hello',
@@ -18,10 +20,7 @@ void main() {
   testWidgets('does not throw with only text', (tester) async {
     await tester.pumpWidget(
       const MaterialApp(
-        home: InfoLabel(
-          text: 'Hello',
-          typeInfoLabel: TypeInfoLabel.info,
-        ),
+        home: InfoLabel(text: 'Hello', typeInfoLabel: TypeInfoLabel.info),
       ),
     );
     expect(find.text('Hello'), findsOneWidget);

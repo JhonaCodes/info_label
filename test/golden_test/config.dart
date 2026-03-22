@@ -25,10 +25,7 @@ void runGoldenTest(
     return AlchemistConfig.runWithConfig(
       config: AlchemistConfig(
         forceUpdateGoldenFiles: true,
-        theme: ThemeData(
-          fontFamily: 'Roboto',
-          useMaterial3: true,
-        ),
+        theme: ThemeData(fontFamily: 'Roboto', useMaterial3: true),
         goldenTestTheme: GoldenTestTheme(
           backgroundColor: Colors.white,
           borderColor: Colors.grey.shade300,
@@ -51,8 +48,9 @@ void runGoldenTest(
           pumpBeforeTest: precacheImages,
           builder: () => GoldenTestGroup(
             columns: columns,
-            columnWidthBuilder:
-                fixedWidth != null ? (_) => FixedColumnWidth(fixedWidth) : null,
+            columnWidthBuilder: fixedWidth != null
+                ? (_) => FixedColumnWidth(fixedWidth)
+                : null,
             children: testScenarios,
           ),
         );
@@ -64,11 +62,7 @@ void runGoldenTest(
 // Helper to create a GoldenTestScenario with 14px padding
 // so widgets don't touch the golden cell borders and edges are
 // clearly visible in the golden output.
-GoldenTestScenario scenario(String name, Widget child) =>
-    GoldenTestScenario(
-      name: name,
-      child: Padding(
-        padding: const EdgeInsets.all(14),
-        child: child,
-      ),
-    );
+GoldenTestScenario scenario(String name, Widget child) => GoldenTestScenario(
+  name: name,
+  child: Padding(padding: const EdgeInsets.all(14), child: child),
+);

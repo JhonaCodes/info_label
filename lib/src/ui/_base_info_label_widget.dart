@@ -8,10 +8,7 @@ class _BaseContent extends StatelessWidget {
   final _InfoLabelData data;
   final DistributionColor labelColor;
 
-  const _BaseContent({
-    required this.data,
-    required this.labelColor,
-  });
+  const _BaseContent({required this.data, required this.labelColor});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +19,7 @@ class _BaseContent extends StatelessWidget {
       children: [
         Flex(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment:
-              data.mainAxisAlignment ?? MainAxisAlignment.center,
+          mainAxisAlignment: data.mainAxisAlignment ?? MainAxisAlignment.center,
           crossAxisAlignment:
               data.crossAxisAlignment ?? CrossAxisAlignment.center,
           direction: Axis.horizontal,
@@ -32,11 +28,7 @@ class _BaseContent extends StatelessWidget {
               Padding(
                 padding:
                     data.leftIconPadding ??
-                    const EdgeInsets.only(
-                      left: 1.75,
-                      bottom: 1.75,
-                      top: 1.75,
-                    ),
+                    const EdgeInsets.only(left: 1.75, bottom: 1.75, top: 1.75),
                 child: data.leftIcon!,
               ),
             const SizedBox(width: 1.75),
@@ -49,21 +41,20 @@ class _BaseContent extends StatelessWidget {
                     const EdgeInsets.only(left: 1.75, right: 1.75),
                 child:
                     (data.msg != null &&
-                            (data.text == null && data.titleWidget == null))
-                        ? data.msg!
-                        : data.titleWidget ??
-                              Text(
-                                data.text!,
-                                style:
-                                    data.textStyle ??
-                                    TextStyle(
-                                      color:
-                                          data.globalColor ??
-                                          labelColor.textColor,
-                                      fontSize: data.fontSize,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                              ),
+                        (data.text == null && data.titleWidget == null))
+                    ? data.msg!
+                    : data.titleWidget ??
+                          Text(
+                            data.text!,
+                            style:
+                                data.textStyle ??
+                                TextStyle(
+                                  color:
+                                      data.globalColor ?? labelColor.textColor,
+                                  fontSize: data.fontSize,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                          ),
               ),
             ),
             const SizedBox(width: 1.75),
@@ -71,17 +62,12 @@ class _BaseContent extends StatelessWidget {
               Padding(
                 padding:
                     data.rightIconPadding ??
-                    const EdgeInsets.only(
-                      right: 1.75,
-                      bottom: 1.75,
-                      top: 1.75,
-                    ),
+                    const EdgeInsets.only(right: 1.75, bottom: 1.75, top: 1.75),
                 child: data.rightIcon!,
               ),
           ],
         ),
-        if (data.msg != null &&
-            (data.text != null || data.titleWidget != null))
+        if (data.msg != null && (data.text != null || data.titleWidget != null))
           Padding(
             padding:
                 data.msgPadding ??
@@ -102,10 +88,7 @@ class _BaseInfoLabel extends StatelessWidget {
   final _InfoLabelData data;
   final _OverlayPainter? overlayPainter;
 
-  const _BaseInfoLabel({
-    required this.data,
-    this.overlayPainter,
-  });
+  const _BaseInfoLabel({required this.data, this.overlayPainter});
 
   @override
   Widget build(BuildContext context) {

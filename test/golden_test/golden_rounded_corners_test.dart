@@ -53,49 +53,67 @@ void main() {
   // --- Side-by-side comparison at radius 12 (most visible difference) ---
   runGoldenTest(
     [
-      scenario('circular_r12', const InfoLabel(
-        text: 'Circular',
-        typeInfoLabel: TypeInfoLabel.info,
-        typeColor: TypeDistributionColor.solid,
-        contrastLevel: 1.0,
-        roundedCorners: 12,
-      )),
-      scenario('smooth_r12', const InfoLabel(
-        text: 'Smooth',
-        typeInfoLabel: TypeInfoLabel.info,
-        typeColor: TypeDistributionColor.solid,
-        contrastLevel: 1.0,
-        roundedCorners: 12,
-        smoothCorners: true,
-      )),
-      scenario('circular_r20', const InfoLabel(
-        text: 'Circular',
-        typeInfoLabel: TypeInfoLabel.error,
-        typeColor: TypeDistributionColor.solid,
-        contrastLevel: 1.0,
-        roundedCorners: 20,
-      )),
-      scenario('smooth_r20', const InfoLabel(
-        text: 'Smooth',
-        typeInfoLabel: TypeInfoLabel.error,
-        typeColor: TypeDistributionColor.solid,
-        contrastLevel: 1.0,
-        roundedCorners: 20,
-        smoothCorners: true,
-      )),
-      scenario('circular_compact', const InfoLabel(
-        text: 'S',
-        typeInfoLabel: TypeInfoLabel.success,
-        compactSize: 32,
-        roundedCorners: 10,
-      )),
-      scenario('smooth_compact', const InfoLabel(
-        text: 'S',
-        typeInfoLabel: TypeInfoLabel.success,
-        compactSize: 32,
-        roundedCorners: 10,
-        smoothCorners: true,
-      )),
+      scenario(
+        'circular_r12',
+        const InfoLabel(
+          text: 'Circular',
+          typeInfoLabel: TypeInfoLabel.info,
+          typeColor: TypeDistributionColor.solid,
+          contrastLevel: 1.0,
+          roundedCorners: 12,
+        ),
+      ),
+      scenario(
+        'smooth_r12',
+        const InfoLabel(
+          text: 'Smooth',
+          typeInfoLabel: TypeInfoLabel.info,
+          typeColor: TypeDistributionColor.solid,
+          contrastLevel: 1.0,
+          roundedCorners: 12,
+          smoothCorners: true,
+        ),
+      ),
+      scenario(
+        'circular_r20',
+        const InfoLabel(
+          text: 'Circular',
+          typeInfoLabel: TypeInfoLabel.error,
+          typeColor: TypeDistributionColor.solid,
+          contrastLevel: 1.0,
+          roundedCorners: 20,
+        ),
+      ),
+      scenario(
+        'smooth_r20',
+        const InfoLabel(
+          text: 'Smooth',
+          typeInfoLabel: TypeInfoLabel.error,
+          typeColor: TypeDistributionColor.solid,
+          contrastLevel: 1.0,
+          roundedCorners: 20,
+          smoothCorners: true,
+        ),
+      ),
+      scenario(
+        'circular_compact',
+        const InfoLabel(
+          text: 'S',
+          typeInfoLabel: TypeInfoLabel.success,
+          compactSize: 32,
+          roundedCorners: 10,
+        ),
+      ),
+      scenario(
+        'smooth_compact',
+        const InfoLabel(
+          text: 'S',
+          typeInfoLabel: TypeInfoLabel.success,
+          compactSize: 32,
+          roundedCorners: 10,
+          smoothCorners: true,
+        ),
+      ),
     ],
     groupName: 'CORNERS_COMPARISON',
     goldenName: 'Circular vs smooth side-by-side',

@@ -260,7 +260,8 @@ class InfoLabel extends StatelessWidget {
       text: overlayText,
       textStyle: overlayText != null
           ? TextStyle(
-              color: overlayTextColor ??
+              color:
+                  overlayTextColor ??
                   (overlayColor != null ? Colors.white : Colors.black87),
               fontSize: overlaySize * 0.55,
               fontWeight: FontWeight.w600,
@@ -280,21 +281,18 @@ class InfoLabel extends StatelessWidget {
     final overlay = _buildOverlayPainter(context);
 
     return switch ((activeOnHover, compactSize != null)) {
-    (true, _) => _HoverInfoLabel(
-      data: _data,
-      compactSize: compactSize,
-      onHoverColor: onHoverColor,
-      overlayPainter: overlay,
-    ),
-    (false, true) => _CompactInfoLabel(
-      data: _data,
-      size: compactSize!,
-      overlayPainter: overlay,
-    ),
-    (false, false) => _BaseInfoLabel(
-      data: _data,
-      overlayPainter: overlay,
-    ),
-  };
+      (true, _) => _HoverInfoLabel(
+        data: _data,
+        compactSize: compactSize,
+        onHoverColor: onHoverColor,
+        overlayPainter: overlay,
+      ),
+      (false, true) => _CompactInfoLabel(
+        data: _data,
+        size: compactSize!,
+        overlayPainter: overlay,
+      ),
+      (false, false) => _BaseInfoLabel(data: _data, overlayPainter: overlay),
+    };
   }
 }

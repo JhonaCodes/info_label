@@ -54,7 +54,8 @@ class _HoverInfoLabelState extends State<_HoverInfoLabel> {
                 roundedCorners: data.roundedCorners,
                 smoothCorners: data.smoothCorners,
                 text: data.text ?? '',
-                textStyle: data.textStyle ??
+                textStyle:
+                    data.textStyle ??
                     TextStyle(
                       color: data.globalColor ?? labelColor.textColor,
                       fontSize: widget.compactSize! * 0.55,

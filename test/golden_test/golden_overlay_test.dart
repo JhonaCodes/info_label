@@ -9,21 +9,39 @@ void main() {
   // --- Mode 1: Dot (color only, no text) ---
   runGoldenTest(
     [
-      scenario('dot_red', const InfoLabel(
-        text: 'Messages', typeInfoLabel: TypeInfoLabel.info,
-        overlayColor: Colors.red, overlaySize: 10,
-        overlayTop: 2, overlayRight: 2,
-      )),
-      scenario('dot_green', const InfoLabel(
-        text: 'Online', typeInfoLabel: TypeInfoLabel.success,
-        overlayColor: Colors.green, overlaySize: 10,
-        overlayTop: 2, overlayRight: 2,
-      )),
-      scenario('dot_orange', const InfoLabel(
-        text: 'Away', typeInfoLabel: TypeInfoLabel.warning,
-        overlayColor: Colors.orange, overlaySize: 10,
-        overlayTop: 2, overlayRight: 2,
-      )),
+      scenario(
+        'dot_red',
+        const InfoLabel(
+          text: 'Messages',
+          typeInfoLabel: TypeInfoLabel.info,
+          overlayColor: Colors.red,
+          overlaySize: 10,
+          overlayTop: 2,
+          overlayRight: 2,
+        ),
+      ),
+      scenario(
+        'dot_green',
+        const InfoLabel(
+          text: 'Online',
+          typeInfoLabel: TypeInfoLabel.success,
+          overlayColor: Colors.green,
+          overlaySize: 10,
+          overlayTop: 2,
+          overlayRight: 2,
+        ),
+      ),
+      scenario(
+        'dot_orange',
+        const InfoLabel(
+          text: 'Away',
+          typeInfoLabel: TypeInfoLabel.warning,
+          overlayColor: Colors.orange,
+          overlaySize: 10,
+          overlayTop: 2,
+          overlayRight: 2,
+        ),
+      ),
     ],
     groupName: 'OVERLAY_DOTS',
     goldenName: 'Overlay mode: dot (color only)',
@@ -35,21 +53,42 @@ void main() {
   // --- Mode 2: Badge (color + text) ---
   runGoldenTest(
     [
-      scenario('badge_3', const InfoLabel(
-        text: 'Inbox', typeInfoLabel: TypeInfoLabel.info,
-        overlayColor: Colors.red, overlaySize: 20, overlayText: '3',
-        overlayTop: 2, overlayRight: 2,
-      )),
-      scenario('badge_12', const InfoLabel(
-        text: 'Alerts', typeInfoLabel: TypeInfoLabel.warning,
-        overlayColor: Colors.red, overlaySize: 20, overlayText: '12',
-        overlayTop: 2, overlayRight: 2,
-      )),
-      scenario('badge_99plus', const InfoLabel(
-        text: 'Notifications', typeInfoLabel: TypeInfoLabel.neutral,
-        overlayColor: Colors.red, overlaySize: 20, overlayText: '99+',
-        overlayTop: 2, overlayRight: 2,
-      )),
+      scenario(
+        'badge_3',
+        const InfoLabel(
+          text: 'Inbox',
+          typeInfoLabel: TypeInfoLabel.info,
+          overlayColor: Colors.red,
+          overlaySize: 20,
+          overlayText: '3',
+          overlayTop: 2,
+          overlayRight: 2,
+        ),
+      ),
+      scenario(
+        'badge_12',
+        const InfoLabel(
+          text: 'Alerts',
+          typeInfoLabel: TypeInfoLabel.warning,
+          overlayColor: Colors.red,
+          overlaySize: 20,
+          overlayText: '12',
+          overlayTop: 2,
+          overlayRight: 2,
+        ),
+      ),
+      scenario(
+        'badge_99plus',
+        const InfoLabel(
+          text: 'Notifications',
+          typeInfoLabel: TypeInfoLabel.neutral,
+          overlayColor: Colors.red,
+          overlaySize: 20,
+          overlayText: '99+',
+          overlayTop: 2,
+          overlayRight: 2,
+        ),
+      ),
     ],
     groupName: 'OVERLAY_BADGES',
     goldenName: 'Overlay mode: badge (color + text)',
@@ -61,21 +100,42 @@ void main() {
   // --- Mode 3: Text only (no background circle) ---
   runGoldenTest(
     [
-      scenario('text_number', const InfoLabel(
-        text: 'Tasks', typeInfoLabel: TypeInfoLabel.info,
-        overlayText: '5', overlayTextColor: Colors.red, overlaySize: 16,
-        overlayTop: 2, overlayRight: 2,
-      )),
-      scenario('text_letter', const InfoLabel(
-        text: 'Priority', typeInfoLabel: TypeInfoLabel.neutral,
-        overlayText: 'A', overlayTextColor: Colors.deepOrange, overlaySize: 16,
-        overlayTop: 2, overlayRight: 2,
-      )),
-      scenario('text_symbol', const InfoLabel(
-        text: 'New', typeInfoLabel: TypeInfoLabel.success,
-        overlayText: '!', overlayTextColor: Colors.red, overlaySize: 16,
-        overlayTop: 2, overlayRight: 2,
-      )),
+      scenario(
+        'text_number',
+        const InfoLabel(
+          text: 'Tasks',
+          typeInfoLabel: TypeInfoLabel.info,
+          overlayText: '5',
+          overlayTextColor: Colors.red,
+          overlaySize: 16,
+          overlayTop: 2,
+          overlayRight: 2,
+        ),
+      ),
+      scenario(
+        'text_letter',
+        const InfoLabel(
+          text: 'Priority',
+          typeInfoLabel: TypeInfoLabel.neutral,
+          overlayText: 'A',
+          overlayTextColor: Colors.deepOrange,
+          overlaySize: 16,
+          overlayTop: 2,
+          overlayRight: 2,
+        ),
+      ),
+      scenario(
+        'text_symbol',
+        const InfoLabel(
+          text: 'New',
+          typeInfoLabel: TypeInfoLabel.success,
+          overlayText: '!',
+          overlayTextColor: Colors.red,
+          overlaySize: 16,
+          overlayTop: 2,
+          overlayRight: 2,
+        ),
+      ),
     ],
     groupName: 'OVERLAY_TEXT_ONLY',
     goldenName: 'Overlay mode: text only (no background)',
@@ -87,18 +147,32 @@ void main() {
   // --- Mode 4: Badge with border ---
   runGoldenTest(
     [
-      scenario('bordered_badge', const InfoLabel(
-        text: 'Chat', typeInfoLabel: TypeInfoLabel.info,
-        overlayColor: Colors.white, overlayBorderColor: Colors.red,
-        overlayText: '3', overlayTextColor: Colors.red, overlaySize: 20,
-        overlayTop: 2, overlayRight: 2,
-      )),
-      scenario('bordered_dot', const InfoLabel(
-        text: 'Status', typeInfoLabel: TypeInfoLabel.neutral,
-        overlayColor: Colors.green, overlayBorderColor: Colors.white,
-        overlaySize: 12,
-        overlayTop: 2, overlayRight: 2,
-      )),
+      scenario(
+        'bordered_badge',
+        const InfoLabel(
+          text: 'Chat',
+          typeInfoLabel: TypeInfoLabel.info,
+          overlayColor: Colors.white,
+          overlayBorderColor: Colors.red,
+          overlayText: '3',
+          overlayTextColor: Colors.red,
+          overlaySize: 20,
+          overlayTop: 2,
+          overlayRight: 2,
+        ),
+      ),
+      scenario(
+        'bordered_dot',
+        const InfoLabel(
+          text: 'Status',
+          typeInfoLabel: TypeInfoLabel.neutral,
+          overlayColor: Colors.green,
+          overlayBorderColor: Colors.white,
+          overlaySize: 12,
+          overlayTop: 2,
+          overlayRight: 2,
+        ),
+      ),
     ],
     groupName: 'OVERLAY_BORDERED',
     goldenName: 'Overlay mode: badge with border',
@@ -110,27 +184,58 @@ void main() {
   // --- Positions (4 corners) ---
   runGoldenTest(
     [
-      scenario('topLeft', const InfoLabel(
-        text: 'TL', typeInfoLabel: TypeInfoLabel.neutral,
-        overlayColor: Colors.red, overlaySize: 14, overlayText: '1',
-        overlayTop: 3, overlayRight: null, overlayLeft: 3,
-      )),
-      scenario('topRight', const InfoLabel(
-        text: 'TR', typeInfoLabel: TypeInfoLabel.neutral,
-        overlayColor: Colors.blue, overlaySize: 14, overlayText: '2',
-        overlayTop: 3, overlayRight: 3,
-      )),
-      scenario('bottomLeft', const InfoLabel(
-        text: 'BL', typeInfoLabel: TypeInfoLabel.neutral,
-        overlayColor: Colors.green, overlaySize: 14, overlayText: '3',
-        overlayTop: null, overlayRight: null,
-        overlayBottom: 3, overlayLeft: 3,
-      )),
-      scenario('bottomRight', const InfoLabel(
-        text: 'BR', typeInfoLabel: TypeInfoLabel.neutral,
-        overlayColor: Colors.orange, overlaySize: 14, overlayText: '4',
-        overlayTop: null, overlayRight: 3, overlayBottom: 3,
-      )),
+      scenario(
+        'topLeft',
+        const InfoLabel(
+          text: 'TL',
+          typeInfoLabel: TypeInfoLabel.neutral,
+          overlayColor: Colors.red,
+          overlaySize: 14,
+          overlayText: '1',
+          overlayTop: 3,
+          overlayRight: null,
+          overlayLeft: 3,
+        ),
+      ),
+      scenario(
+        'topRight',
+        const InfoLabel(
+          text: 'TR',
+          typeInfoLabel: TypeInfoLabel.neutral,
+          overlayColor: Colors.blue,
+          overlaySize: 14,
+          overlayText: '2',
+          overlayTop: 3,
+          overlayRight: 3,
+        ),
+      ),
+      scenario(
+        'bottomLeft',
+        const InfoLabel(
+          text: 'BL',
+          typeInfoLabel: TypeInfoLabel.neutral,
+          overlayColor: Colors.green,
+          overlaySize: 14,
+          overlayText: '3',
+          overlayTop: null,
+          overlayRight: null,
+          overlayBottom: 3,
+          overlayLeft: 3,
+        ),
+      ),
+      scenario(
+        'bottomRight',
+        const InfoLabel(
+          text: 'BR',
+          typeInfoLabel: TypeInfoLabel.neutral,
+          overlayColor: Colors.orange,
+          overlaySize: 14,
+          overlayText: '4',
+          overlayTop: null,
+          overlayRight: 3,
+          overlayBottom: 3,
+        ),
+      ),
     ],
     groupName: 'OVERLAY_POSITIONS',
     goldenName: 'Overlay at all 4 corner positions',
@@ -142,23 +247,44 @@ void main() {
   // --- On compact and base with icons ---
   runGoldenTest(
     [
-      scenario('on_compact_badge', const InfoLabel(
-        text: 'S', typeInfoLabel: TypeInfoLabel.info,
-        compactSize: 32, overlayColor: Colors.red,
-        overlaySize: 16, overlayText: '3',
-        overlayTop: 2, overlayRight: 2,
-      )),
-      scenario('on_compact_dot', const InfoLabel(
-        text: 'N', typeInfoLabel: TypeInfoLabel.error,
-        compactSize: 32, overlayColor: Colors.green, overlaySize: 10,
-        overlayTop: 2, overlayRight: 2,
-      )),
-      scenario('on_base_with_icon', const InfoLabel(
-        text: 'Chat', typeInfoLabel: TypeInfoLabel.info,
-        leftIcon: Icon(Icons.chat, size: 16),
-        overlayColor: Colors.red, overlaySize: 18, overlayText: '7',
-        overlayTop: 2, overlayRight: 2,
-      )),
+      scenario(
+        'on_compact_badge',
+        const InfoLabel(
+          text: 'S',
+          typeInfoLabel: TypeInfoLabel.info,
+          compactSize: 32,
+          overlayColor: Colors.red,
+          overlaySize: 16,
+          overlayText: '3',
+          overlayTop: 2,
+          overlayRight: 2,
+        ),
+      ),
+      scenario(
+        'on_compact_dot',
+        const InfoLabel(
+          text: 'N',
+          typeInfoLabel: TypeInfoLabel.error,
+          compactSize: 32,
+          overlayColor: Colors.green,
+          overlaySize: 10,
+          overlayTop: 2,
+          overlayRight: 2,
+        ),
+      ),
+      scenario(
+        'on_base_with_icon',
+        const InfoLabel(
+          text: 'Chat',
+          typeInfoLabel: TypeInfoLabel.info,
+          leftIcon: Icon(Icons.chat, size: 16),
+          overlayColor: Colors.red,
+          overlaySize: 18,
+          overlayText: '7',
+          overlayTop: 2,
+          overlayRight: 2,
+        ),
+      ),
     ],
     groupName: 'OVERLAY_CONTEXTS',
     goldenName: 'Overlay on compact and base with icons',

@@ -90,8 +90,9 @@ class DistributionColor {
     backgroundColor: backgroundColor,
     borderColor: borderColor,
     contrastLevel: contrastLevel,
-    textColor: (textColor ?? _autoTextColor(backgroundColor))
-        .withValues(alpha: contrastLevel),
+    textColor: (textColor ?? _autoTextColor(backgroundColor)).withValues(
+      alpha: contrastLevel,
+    ),
   );
 
   /// Retrieves a new instance of [DistributionColor] with solid text, contrast background border.
@@ -112,8 +113,9 @@ class DistributionColor {
     backgroundColor: backgroundColor.withValues(alpha: contrastLevel),
     borderColor: borderColor?.withValues(alpha: contrastLevel),
     contrastLevel: contrastLevel,
-    textColor: (textColor ?? _autoTextColor(backgroundColor))
-        .withValues(alpha: contrastLevel),
+    textColor: (textColor ?? _autoTextColor(backgroundColor)).withValues(
+      alpha: contrastLevel,
+    ),
   );
 
   /// Picks black or white text depending on the [bg] luminance.
