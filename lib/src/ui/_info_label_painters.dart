@@ -19,23 +19,22 @@ part of 'info_label_widget.dart';
 /// - `0.6` = iOS/Figma default
 /// - `1.0` = maximum smoothness
 Path _squirclePath(Rect rect, double radius, {double smoothing = 0.6}) {
-  final w = rect.width;
-  final h = rect.height;
+  // Clamp radius to half the shortest side so corners never overlap.
   final r = radius.clamp(0.0, rect.shortestSide / 2);
 
-  // The smoothing factor determines how far the curve extends
-  // beyond the circular arc region.
-  final p = (1 + smoothing) * r;
+  // How far from the corner the curve extends. Clamped uniformly
+  // so all 4 corners are identical regardless of rect aspect ratio.
+  final maxP = rect.shortestSide / 2;
+  final p = ((1 + smoothing) * r).clamp(0.0, maxP);
 
-  // Clamp p so the curve doesn't exceed half the side length.
-  final px = p.clamp(0.0, w / 2);
-  final py = p.clamp(0.0, h / 2);
+  // Recompute effective radius from the clamped p so all bézier
+  // control points stay proportional and symmetric.
+  final er = p / (1 + smoothing);
 
   // Arc-to-line transition ratios (derived from Figma's algorithm).
-  // These control the 3 bézier segments per corner.
-  final a = r * 0.292893; // r * (1 - cos(45°)) ≈ r * 0.2929
-  final b = r * 0.585786; // r * (1 - cos(45°)) * 2
-  final d = (p - r) * smoothing; // extra extension from smoothing
+  final a = er * 0.292893; // er * (1 - cos(45°))
+  final b = er * 0.585786; // er * (1 - cos(45°)) * 2
+  final d = (p - er) * smoothing; // smoothing extension
 
   final l = rect.left;
   final t = rect.top;
@@ -43,27 +42,27 @@ Path _squirclePath(Rect rect, double radius, {double smoothing = 0.6}) {
   final bo = rect.bottom;
 
   return Path()
-    ..moveTo(l + px, t)
+    ..moveTo(l + p, t)
 
-    // ── Top edge → Top-right corner (3 curves) ──
-    ..lineTo(ri - px, t)
-    ..cubicTo(ri - px + d, t, ri - b, t, ri - a, t + a)
-    ..cubicTo(ri, t + b, ri, t + py - d, ri, t + py)
+    // ── Top edge → Top-right corner ──
+    ..lineTo(ri - p, t)
+    ..cubicTo(ri - p + d, t, ri - b, t, ri - a, t + a)
+    ..cubicTo(ri, t + b, ri, t + p - d, ri, t + p)
 
-    // ── Right edge → Bottom-right corner (3 curves) ──
-    ..lineTo(ri, bo - py)
-    ..cubicTo(ri, bo - py + d, ri, bo - b, ri - a, bo - a)
-    ..cubicTo(ri - b, bo, ri - px + d, bo, ri - px, bo)
+    // ── Right edge → Bottom-right corner ──
+    ..lineTo(ri, bo - p)
+    ..cubicTo(ri, bo - p + d, ri, bo - b, ri - a, bo - a)
+    ..cubicTo(ri - b, bo, ri - p + d, bo, ri - p, bo)
 
-    // ── Bottom edge → Bottom-left corner (3 curves) ──
-    ..lineTo(l + px, bo)
-    ..cubicTo(l + px - d, bo, l + b, bo, l + a, bo - a)
-    ..cubicTo(l, bo - b, l, bo - py + d, l, bo - py)
+    // ── Bottom edge → Bottom-left corner ──
+    ..lineTo(l + p, bo)
+    ..cubicTo(l + p - d, bo, l + b, bo, l + a, bo - a)
+    ..cubicTo(l, bo - b, l, bo - p + d, l, bo - p)
 
-    // ── Left edge → Top-left corner (3 curves) ──
-    ..lineTo(l, t + py)
-    ..cubicTo(l, t + py - d, l, t + b, l + a, t + a)
-    ..cubicTo(l + b, t, l + px - d, t, l + px, t)
+    // ── Left edge → Top-left corner ──
+    ..lineTo(l, t + p)
+    ..cubicTo(l, t + p - d, l, t + b, l + a, t + a)
+    ..cubicTo(l + b, t, l + p - d, t, l + p, t)
 
     ..close();
 }
