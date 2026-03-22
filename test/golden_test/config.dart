@@ -1,37 +1,42 @@
-import 'dart:developer';
-
 import 'package:alchemist/alchemist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-runGoldenTest(
+// Standardized golden test runner for all InfoLabel golden tests.
+// Uses a neutral white background to avoid color distortion,
+// and loads Roboto font for consistent text rendering.
+void runGoldenTest(
   List<Widget> testScenarios, {
-  required String groupData,
+  required String groupName,
   required String goldenName,
   required String fileName,
-  PumpAction? pumpBeforeTest,
   int? columns,
   double? fixedWidth,
-  Map<String, Object>? sharedPrefs,
-  bool? catchOverflows,
 }) {
-  group(groupData, () {
+  group(groupName, () {
     TestWidgetsFlutterBinding.ensureInitialized();
+
     setUpAll(() async {
       final fontLoader = FontLoader('Roboto');
-
       await fontLoader.load();
     });
 
     return AlchemistConfig.runWithConfig(
       config: AlchemistConfig(
         forceUpdateGoldenFiles: true,
-        theme: ThemeData(fontFamily: 'Roboto'),
+        theme: ThemeData(
+          fontFamily: 'Roboto',
+          useMaterial3: true,
+        ),
         goldenTestTheme: GoldenTestTheme(
-          backgroundColor: Colors.grey.shade100,
-          borderColor: Colors.grey.shade400,
-          nameTextStyle: const TextStyle(fontFamily: 'Roboto'),
+          backgroundColor: Colors.white,
+          borderColor: Colors.grey.shade300,
+          nameTextStyle: const TextStyle(
+            fontFamily: 'Roboto',
+            fontSize: 10,
+            color: Colors.black87,
+          ),
         ),
         platformGoldensConfig: const PlatformGoldensConfig(
           enabled: true,
@@ -43,60 +48,27 @@ runGoldenTest(
         goldenTest(
           goldenName,
           fileName: fileName,
-          pumpBeforeTest: pumpBeforeTest ?? precacheImages,
-          builder: () {
-            final originalOnError = FlutterError.onError!;
-
-            FlutterError.onError = (FlutterErrorDetails details) {
-              final exception = details.exception;
-              final isOverflowError =
-                  exception is FlutterError &&
-                  !exception.diagnostics.any(
-                    (e) => e.value.toString().startsWith(
-                      "A RenderFlex overflowed by",
-                    ),
-                  );
-
-              if (isOverflowError && catchOverflows == true) {
-                log("Flutter overflow error is being caught by golden test");
-              } else {
-                originalOnError(details); // call test framework's error handler
-              }
-            };
-
-            return GoldenTestGroup(
-              columns: columns,
-              columnWidthBuilder: fixedWidth != null
-                  ? (_) => FixedColumnWidth(fixedWidth)
-                  : null,
-              children: testScenarios,
-            );
-          },
+          pumpBeforeTest: precacheImages,
+          builder: () => GoldenTestGroup(
+            columns: columns,
+            columnWidthBuilder:
+                fixedWidth != null ? (_) => FixedColumnWidth(fixedWidth) : null,
+            children: testScenarios,
+          ),
         );
       },
     );
   });
 }
 
-class ScenarioWidget extends StatelessWidget {
-  final Widget child;
-
-  const ScenarioWidget({super.key, required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    ThemeData currentTheme = ThemeData.light();
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: DefaultTextStyle(
-        style: currentTheme.textTheme.bodyMedium!,
+// Helper to create a GoldenTestScenario with 14px padding
+// so widgets don't touch the golden cell borders and edges are
+// clearly visible in the golden output.
+GoldenTestScenario scenario(String name, Widget child) =>
+    GoldenTestScenario(
+      name: name,
+      child: Padding(
+        padding: const EdgeInsets.all(14),
         child: child,
       ),
     );
-  }
-}

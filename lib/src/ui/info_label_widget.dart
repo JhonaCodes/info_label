@@ -4,20 +4,40 @@ import 'package:info_label/src/core/distribution_color.dart';
 import 'package:info_label/src/core/type_color.dart';
 import 'package:info_label/src/core/type_info_label.dart';
 
+part '_info_label_data.dart';
+part '_info_label_painters.dart';
+part '_base_info_label_widget.dart';
+part '_hover_info_label_widget.dart';
+part '_compact_info_label_widget.dart';
+part '_color_by_type_info_widget.dart';
+
 /// Widget that displays customizable information with label styling.
 ///
-/// This widget allows displaying text with optional icons on the left or right side.
-/// Text color, border color, background color, and icon color are all customizable.
-/// Additionally, you can configure color distribution, contrast level, font size, and corner radius of the label.
+/// All rendering uses [CustomPainter] as the base — background, border,
+/// text (in compact mode), and overlay indicators are painted directly
+/// on canvas for minimal RenderObject count.
 ///
-/// Example Basic Usage:
+/// Features are composable and independent:
+///
+/// - **compact**: Set [compactSize] for a fixed `size × size` label
+///   with auto-scaled centered content.
+/// - **overlay**: Set [overlayColor] to paint a positioned circle indicator
+///   on top of the label (with optional [overlayText]).
+/// - **hover**: Set [activeOnHover] to `true` for paint-only hover repaint
+///   via [MouseRegion] (no widget rebuild).
+///
 /// ```dart
+/// // Compact + overlay + hover
 /// InfoLabel(
-///  text: "Success",
-///   typeInfoLabel: TypeInfoLabel.success,
+///   text: "S",
+///   compactSize: 24,
+///   overlayColor: Colors.red,
+///   overlaySize: 8,
+///   activeOnHover: true,
+///   typeInfoLabel: TypeInfoLabel.info,
 /// )
 /// ```
-class InfoLabel extends StatefulWidget {
+class InfoLabel extends StatelessWidget {
   /// The text to be displayed on the label.
   final String? text;
 
@@ -33,6 +53,8 @@ class InfoLabel extends StatefulWidget {
   final Color? backgroundColor;
 
   /// Color when hovering over the label.
+  ///
+  /// Only used when [activeOnHover] is `true`.
   final Color? onHoverColor;
 
   /// Global color that affects all colors if active.
@@ -51,8 +73,16 @@ class InfoLabel extends StatefulWidget {
 
   /// Corner radius of the label.
   ///
-  /// Default value is 5.0.
+  /// Default value is 3.0.
   final double roundedCorners;
+
+  /// Uses iOS-style continuous corner radius (squircle) instead of
+  /// standard circular arcs.
+  ///
+  /// When `true`, corners transition smoothly into straight edges
+  /// using cubic bézier curves, matching the visual style of iOS
+  /// rounded rectangles.
+  final bool smoothCorners;
 
   /// Optional icon on the right side of the label.
   final Widget? rightIcon;
@@ -69,7 +99,7 @@ class InfoLabel extends StatefulWidget {
   /// Type of label defining default colors for a specific appearance.
   final TypeInfoLabel typeInfoLabel;
 
-  /// Alignment for content
+  /// Alignment for content.
   final MainAxisAlignment? mainAxisAlignment;
 
   final CrossAxisAlignment? crossAxisAlignment;
@@ -85,6 +115,37 @@ class InfoLabel extends StatefulWidget {
   final EdgeInsets? msgPadding;
 
   final bool isTextAdaptive;
+
+  /// Overlay indicator circle color.
+  ///
+  /// When non-null, a circle is painted on top of the label
+  /// at [overlayTop], [overlayRight], [overlayBottom], [overlayLeft].
+  final Color? overlayColor;
+
+  /// Overlay indicator circle diameter.
+  final double overlaySize;
+
+  /// Text/number inside the overlay circle.
+  final String? overlayText;
+
+  /// Text color inside the overlay circle.
+  final Color? overlayTextColor;
+
+  /// Overlay position from the top edge.
+  final double? overlayTop;
+
+  /// Overlay position from the right edge.
+  final double? overlayRight;
+
+  /// Overlay position from the bottom edge.
+  final double? overlayBottom;
+
+  /// Overlay position from the left edge.
+  final double? overlayLeft;
+
+  /// When non-null, uses a fixed `compactSize × compactSize` layout
+  /// with auto-scaled centered content instead of the standard layout.
+  final double? compactSize;
 
   /// Creates a new instance of [InfoLabel].
   const InfoLabel({
@@ -105,6 +166,7 @@ class InfoLabel extends StatefulWidget {
     this.textStyle,
     this.fontSize,
     this.roundedCorners = 3.0,
+    this.smoothCorners = false,
     this.rightIcon,
     this.leftIcon,
     this.activeOnHover = false,
@@ -113,200 +175,99 @@ class InfoLabel extends StatefulWidget {
     this.msg,
     this.msgPadding,
     this.isTextAdaptive = true,
+    this.overlayColor,
+    this.overlaySize = 8.0,
+    this.overlayText,
+    this.overlayTextColor,
+    this.overlayTop = -2.0,
+    this.overlayRight = -2.0,
+    this.overlayBottom,
+    this.overlayLeft,
+    this.compactSize,
   }) : assert(!(text != null && titleWidget != null), '''\n
-╔═ASSERTION ERROR 
-║ Choose one property:                
-║ • text                                                         
-║ • titleWidget                                                  
-║                                                                
-║ Cannot use both.                       
-║                                                                
-║ 📝 Correct usage:                                    
-║                                                                
-║ // Option 1                                        
-║ InfoLabel(                                                     
-║   text: "Label",                                                              
-║ )                                                             
-║                                                                
-║ // Option 2                                 
-║ InfoLabel(                                                     
-║   titleWidget: Text("Label"),                         
-║ )                                                             
-║                                                                
-║ ❌ Found:                                             
-║ text: $text                                                    
-║ titleWidget: $titleWidget                                                               
+╔═ASSERTION ERROR
+║ Choose one property:
+║ • text
+║ • titleWidget
+║
+║ Cannot use both.
+║
+║ 📝 Correct usage:
+║
+║ // Option 1
+║ InfoLabel(
+║   text: "Label",
+║ )
+║
+║ // Option 2
+║ InfoLabel(
+║   titleWidget: Text("Label"),
+║ )
+║
+║ ❌ Found:
+║ text: $text
+║ titleWidget: $titleWidget
 ╚═
 ''');
 
+  /// Builds the shared data object from the widget properties.
+  _InfoLabelData get _data => _InfoLabelData(
+    text: text,
+    titleWidget: titleWidget,
+    textColor: textColor,
+    borderColor: borderColor,
+    backgroundColor: backgroundColor,
+    globalColor: globalColor,
+    textStyle: textStyle,
+    fontSize: fontSize,
+    contrastLevel: contrastLevel,
+    roundedCorners: roundedCorners,
+    smoothCorners: smoothCorners,
+    rightIcon: rightIcon,
+    leftIcon: leftIcon,
+    typeColor: typeColor,
+    typeInfoLabel: typeInfoLabel,
+    mainAxisAlignment: mainAxisAlignment,
+    crossAxisAlignment: crossAxisAlignment,
+    leftIconPadding: leftIconPadding,
+    rightIconPadding: rightIconPadding,
+    textPadding: textPadding,
+    msg: msg,
+    msgPadding: msgPadding,
+    isTextAdaptive: isTextAdaptive,
+  );
+
+  /// Returns an [_OverlayPainter] if overlay is configured, `null` otherwise.
+  _OverlayPainter? get _overlayPainter => overlayColor != null
+      ? _OverlayPainter(
+          color: overlayColor!,
+          overlaySize: overlaySize,
+          text: overlayText,
+          textColor: overlayTextColor,
+          top: overlayTop,
+          right: overlayRight,
+          bottom: overlayBottom,
+          left: overlayLeft,
+        )
+      : null;
+
   @override
-  State<InfoLabel> createState() => _InfoLabelState();
-}
-
-class _InfoLabelState extends State<InfoLabel> {
-  /// Indicates if the mouse is over the label.
-  bool _isHovered = false;
-
-  @override
-  void initState() {
-    /// Set default colors if textStyle and textColor are provided.
-    if (widget.textStyle != null && widget.textColor != null) {
-      widget.textStyle?.copyWith(color: widget.textColor);
-    }
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: _onHoverAction,
-      onExit: _onHoverAction,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(widget.roundedCorners),
-          color: _colorOnHover,
-          border: Border.all(
-            color: _typeLabelColor.borderColor ?? Colors.transparent,
-          ),
-        ),
-        child: Column(
-          crossAxisAlignment: .start,
-          mainAxisAlignment: .start,
-          mainAxisSize: .min,
-          children: [
-            Flex(
-              mainAxisSize: .min,
-              mainAxisAlignment: widget.mainAxisAlignment ?? .center,
-              crossAxisAlignment: widget.crossAxisAlignment ?? .center,
-              direction: .horizontal,
-              children: [
-                if (widget.leftIcon != null)
-                  Padding(
-                    padding:
-                        widget.leftIconPadding ??
-                        const EdgeInsets.only(
-                          left: 1.75,
-                          bottom: 1.75,
-                          top: 1.75,
-                        ),
-                    child: widget.leftIcon!,
-                  ),
-                const SizedBox(width: 1.75),
-                Flexible(
-                  flex: 1,
-                  fit: widget.isTextAdaptive ? .loose : .tight,
-                  child: Padding(
-                    padding:
-                        widget.textPadding ??
-                        const EdgeInsets.only(left: 1.75, right: 1.75),
-                    child:
-                        (widget.msg != null &&
-                            (widget.text == null && widget.titleWidget == null))
-                        ? widget.msg!
-                        : widget.titleWidget ??
-                              Text(
-                                widget.text!,
-                                style:
-                                    widget.textStyle ??
-                                    TextStyle(
-                                      color:
-                                          widget.globalColor ??
-                                          _typeLabelColor.textColor,
-                                      fontSize: widget.fontSize,
-                                      fontWeight: .w500,
-                                    ),
-                              ),
-                  ),
-                ),
-                const SizedBox(width: 1.75),
-                if (widget.rightIcon != null)
-                  Padding(
-                    padding:
-                        widget.rightIconPadding ??
-                        const EdgeInsets.only(
-                          right: 1.75,
-                          bottom: 1.75,
-                          top: 1.75,
-                        ),
-                    child: widget.rightIcon!,
-                  ),
-              ],
-            ),
-            if (widget.msg != null &&
-                (widget.text != null || widget.titleWidget != null))
-              Padding(
-                padding:
-                    widget.msgPadding ??
-                    const EdgeInsets.only(left: 5, right: 5, bottom: 5),
-                child: widget.msg!,
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  /// Gets the color of the label based on the distribution type.
-  DistributionColor get _typeLabelColor {
-    final DistributionColor distributionColor = widget.globalColor != null
-        ? DistributionColor(
-            textColor: widget.globalColor!,
-            contrastLevel: widget.contrastLevel,
-            borderColor: widget.globalColor!,
-            backgroundColor: widget.globalColor!,
-          )
-        : DistributionColor(
-            textColor: widget.textColor,
-            contrastLevel: widget.contrastLevel,
-            borderColor: widget.borderColor ?? _colorType,
-            backgroundColor: widget.backgroundColor ?? _colorType,
-          );
-    return distributionColor.labelInfoColors(typeColor: widget.typeColor);
-  }
-
-  /// Gets the color based on the label type.
-  Color get _colorType => _ColorByTypeInfo.get(widget.typeInfoLabel);
-
-  /// Validate if is onHover
-  void _onHoverAction(PointerEvent _) =>
-      widget.activeOnHover ? setState(() => _isHovered = !_isHovered) : null;
-
-  /// Return color for onHover
-  Color? get _colorOnHover {
-    if (_isHovered) {
-      return widget.onHoverColor ??
-          widget.globalColor?.withValues(alpha: widget.contrastLevel);
-    }
-
-    return _typeLabelColor.backgroundColor;
-  }
-}
-
-/// Provides static methods to retrieve colors based on TypeInfoLabel.
-///
-/// This mixin contains a static method `get` which returns a Color based on the provided TypeInfoLabel.
-///
-/// Example Usage:
-/// ```dart
-/// final successColor = _ColorByTypeInfo.get(TypeInfoLabel.success); // Returns Color(0xFF2ecc71)
-/// ```
-mixin _ColorByTypeInfo {
-  /// Returns a Color based on the provided TypeInfoLabel.
-  ///
-  /// If the provided TypeInfoLabel is not recognized, it returns a default color (Color(0xFFA8A8A8)).
-  static Color get(TypeInfoLabel type) => switch (type) {
-    TypeInfoLabel.success => const Color(0xff00501F),
-    TypeInfoLabel.error => const Color(0xFFe74c3c),
-    TypeInfoLabel.neutral => const Color(0xFF284b63),
-    TypeInfoLabel.warning => const Color(0xFFf39c12),
-    TypeInfoLabel.empty => const Color(0xFFdddddd),
-    TypeInfoLabel.dark => const Color(0xFF000814),
-    TypeInfoLabel.info => const Color(0xFF3498db),
-    TypeInfoLabel.pending => const Color(0xFFf1c40f),
-    TypeInfoLabel.confirmed => const Color(0xFF40E0D0),
-    TypeInfoLabel.expired => const Color(0xFF663300),
-    TypeInfoLabel.disabled => const Color(0xFF8d99ae),
-    TypeInfoLabel.critical => const Color(0xFF660708),
-    TypeInfoLabel.none => const Color(0xFFA8A8A8),
+  Widget build(BuildContext context) =>
+      switch ((activeOnHover, compactSize != null)) {
+    (true, _) => _HoverInfoLabel(
+      data: _data,
+      compactSize: compactSize,
+      onHoverColor: onHoverColor,
+      overlayPainter: _overlayPainter,
+    ),
+    (false, true) => _CompactInfoLabel(
+      data: _data,
+      size: compactSize!,
+      overlayPainter: _overlayPainter,
+    ),
+    (false, false) => _BaseInfoLabel(
+      data: _data,
+      overlayPainter: _overlayPainter,
+    ),
   };
 }
