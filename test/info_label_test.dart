@@ -2,128 +2,201 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:info_label/info_label.dart';
 
+Widget _app(Widget child) => MaterialApp(home: Scaffold(body: child));
+
 void main() {
-  testWidgets('InfoLabel displays correct text', (WidgetTester tester) async {
-    const String expectedText = "Sample Text";
+  // --- Text rendering ---
 
+  testWidgets('displays text correctly', (tester) async {
     await tester.pumpWidget(
-      _materialTest(
-        const InfoLabel(
-          text: expectedText,
-          typeInfoLabel: TypeInfoLabel.neutral,
-        ),
-      ),
+      _app(const InfoLabel(
+        text: 'Sample Text',
+        typeInfoLabel: TypeInfoLabel.neutral,
+      )),
     );
-
-    final textFinder = find.text(expectedText);
-
-    expect(textFinder, findsOneWidget);
+    expect(find.text('Sample Text'), findsOneWidget);
   });
 
-  testWidgets('InfoLabel displays correct left icon', (
-    WidgetTester tester,
-  ) async {
-    const IconData expectedLeftIcon = Icons.warning;
+  // --- Icon rendering ---
 
+  testWidgets('displays left icon', (tester) async {
     await tester.pumpWidget(
-      _materialTest(
-        const InfoLabel(
-          text: "Sample Text",
-          leftIcon: Icon(expectedLeftIcon),
-          typeInfoLabel: TypeInfoLabel.neutral,
-        ),
-      ),
+      _app(const InfoLabel(
+        text: 'With Icon',
+        typeInfoLabel: TypeInfoLabel.neutral,
+        leftIcon: Icon(Icons.warning),
+      )),
     );
-
-    final iconFinder = find.byIcon(expectedLeftIcon);
-
-    expect(iconFinder, findsOneWidget);
+    expect(find.byIcon(Icons.warning), findsOneWidget);
   });
 
-  testWidgets('InfoLabel displays correct right icon', (
-    WidgetTester tester,
-  ) async {
-    const IconData expectedRightIcon = Icons.check_circle;
-
+  testWidgets('displays right icon', (tester) async {
     await tester.pumpWidget(
-      _materialTest(
-        const InfoLabel(
-          text: "Sample Text",
-          rightIcon: Icon(expectedRightIcon),
-          typeInfoLabel: TypeInfoLabel.neutral,
-        ),
-      ),
+      _app(const InfoLabel(
+        text: 'With Icon',
+        typeInfoLabel: TypeInfoLabel.neutral,
+        rightIcon: Icon(Icons.check_circle),
+      )),
     );
-
-    final iconFinder = find.byIcon(expectedRightIcon);
-
-    expect(iconFinder, findsOneWidget);
+    expect(find.byIcon(Icons.check_circle), findsOneWidget);
   });
 
-  testWidgets('InfoLabel displays correct type of label', (
-    WidgetTester tester,
-  ) async {
-    const TypeInfoLabel expectedType = TypeInfoLabel.warning;
+  // --- Type ---
 
+  testWidgets('applies correct TypeInfoLabel', (tester) async {
     await tester.pumpWidget(
-      _materialTest(
-        const InfoLabel(text: "Sample Text", typeInfoLabel: expectedType),
-      ),
+      _app(const InfoLabel(
+        text: 'Typed',
+        typeInfoLabel: TypeInfoLabel.success,
+      )),
     );
-
-    final labelFinder = find.byWidgetPredicate(
-      (widget) =>
-          widget is InfoLabel && widget.typeInfoLabel.name == expectedType.name,
-    );
-
-    expect(labelFinder, findsOneWidget);
+    final widget = tester.widget<InfoLabel>(find.byType(InfoLabel));
+    expect(widget.typeInfoLabel, TypeInfoLabel.success);
   });
 
-  testWidgets('InfoLabel displays correct background color', (
-    WidgetTester tester,
-  ) async {
-    const Color expectedBackgroundColor = Colors.blue;
+  // --- Colors ---
 
+  testWidgets('applies custom backgroundColor', (tester) async {
     await tester.pumpWidget(
-      _materialTest(
-        const InfoLabel(
-          text: "Sample Text",
-          backgroundColor: expectedBackgroundColor,
-          typeInfoLabel: TypeInfoLabel.neutral,
-        ),
-      ),
+      _app(const InfoLabel(
+        text: 'Blue',
+        typeInfoLabel: TypeInfoLabel.neutral,
+        backgroundColor: Colors.blue,
+      )),
     );
-
-    final containerFinder = find.byWidgetPredicate(
-      (widget) =>
-          widget is InfoLabel &&
-          widget.backgroundColor == expectedBackgroundColor,
-    );
-
-    expect(containerFinder, findsOneWidget);
+    final widget = tester.widget<InfoLabel>(find.byType(InfoLabel));
+    expect(widget.backgroundColor, Colors.blue);
   });
 
-  testWidgets('InfoLabel displays correct text color', (
-    WidgetTester tester,
-  ) async {
-    const Color expectedTextColor = Colors.red;
-
+  testWidgets('applies custom textColor to Text widget', (tester) async {
     await tester.pumpWidget(
-      _materialTest(
-        const InfoLabel(
-          text: "Sample Text",
-          textColor: expectedTextColor,
-          typeInfoLabel: TypeInfoLabel.neutral,
-        ),
-      ),
+      _app(const InfoLabel(
+        text: 'Red Text',
+        typeInfoLabel: TypeInfoLabel.neutral,
+        textColor: Colors.red,
+      )),
     );
+    final text = tester.widget<Text>(find.text('Red Text'));
+    expect(text.style?.color, Colors.red);
+  });
 
-    final textFinder = find.byWidgetPredicate(
-      (widget) => widget is Text && widget.style!.color == expectedTextColor,
+  // --- Compact mode ---
+
+  testWidgets('compact creates SizedBox with correct dimensions', (tester) async {
+    await tester.pumpWidget(
+      _app(const InfoLabel(
+        text: 'S',
+        typeInfoLabel: TypeInfoLabel.info,
+        compactSize: 32,
+      )),
     );
+    final sizedBox = tester.widget<SizedBox>(find.byType(SizedBox).first);
+    expect(sizedBox.width, 32);
+    expect(sizedBox.height, 32);
+  });
 
-    expect(textFinder, findsOneWidget);
+  testWidgets('compact text-only provides Semantics label', (tester) async {
+    await tester.pumpWidget(
+      _app(const InfoLabel(
+        text: 'X',
+        typeInfoLabel: TypeInfoLabel.info,
+        compactSize: 24,
+      )),
+    );
+    expect(find.bySemanticsLabel('X'), findsOneWidget);
+  });
+
+  // --- Overlay ---
+
+  testWidgets('overlayColor activates foregroundPainter', (tester) async {
+    await tester.pumpWidget(
+      _app(const InfoLabel(
+        text: 'Badge',
+        typeInfoLabel: TypeInfoLabel.info,
+        overlayColor: Colors.red,
+        overlaySize: 10,
+      )),
+    );
+    final customPaint = tester.widget<CustomPaint>(
+      find.byType(CustomPaint).first,
+    );
+    expect(customPaint.foregroundPainter, isNotNull);
+  });
+
+  testWidgets('no foregroundPainter when overlayColor is null', (tester) async {
+    await tester.pumpWidget(
+      _app(const InfoLabel(
+        text: 'Clean',
+        typeInfoLabel: TypeInfoLabel.info,
+      )),
+    );
+    // Find the CustomPaint that belongs to InfoLabel (has _InfoLabelBasePainter)
+    final customPaints = tester.widgetList<CustomPaint>(find.byType(CustomPaint));
+    final infoLabelPaint = customPaints.where(
+      (cp) => cp.painter.toString().contains('_InfoLabelBasePainter'),
+    );
+    expect(infoLabelPaint, isNotEmpty);
+    expect(infoLabelPaint.first.foregroundPainter, isNull);
+  });
+
+  // --- Hover ---
+
+  testWidgets('activeOnHover true creates MouseRegion with hover listeners', (tester) async {
+    await tester.pumpWidget(
+      _app(const InfoLabel(
+        text: 'Hover',
+        typeInfoLabel: TypeInfoLabel.info,
+        activeOnHover: true,
+      )),
+    );
+    // Scaffold adds its own MouseRegion, so look for at least 2
+    expect(find.byType(MouseRegion), findsAtLeast(2));
+  });
+
+  testWidgets('activeOnHover false has no extra MouseRegion', (tester) async {
+    await tester.pumpWidget(
+      _app(const InfoLabel(
+        text: 'Static',
+        typeInfoLabel: TypeInfoLabel.info,
+      )),
+    );
+    // Only Scaffold's MouseRegion should exist, not one from _HoverInfoLabel
+    expect(find.byType(MouseRegion), findsOneWidget);
+  });
+
+  // --- Message ---
+
+  testWidgets('msg displays below text when both present', (tester) async {
+    await tester.pumpWidget(
+      _app(const InfoLabel(
+        text: 'Title',
+        typeInfoLabel: TypeInfoLabel.info,
+        msg: Text('Description'),
+      )),
+    );
+    expect(find.text('Title'), findsOneWidget);
+    expect(find.text('Description'), findsOneWidget);
+  });
+
+  testWidgets('msg as primary content when text is null', (tester) async {
+    await tester.pumpWidget(
+      _app(const InfoLabel(
+        typeInfoLabel: TypeInfoLabel.info,
+        msg: Text('Only Message'),
+      )),
+    );
+    expect(find.text('Only Message'), findsOneWidget);
+  });
+
+  // --- titleWidget ---
+
+  testWidgets('titleWidget renders when text is null', (tester) async {
+    await tester.pumpWidget(
+      _app(const InfoLabel(
+        titleWidget: Icon(Icons.star),
+        typeInfoLabel: TypeInfoLabel.info,
+      )),
+    );
+    expect(find.byIcon(Icons.star), findsOneWidget);
   });
 }
-
-Widget _materialTest(Widget child) => MaterialApp(home: Scaffold(body: child));

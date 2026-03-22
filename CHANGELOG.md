@@ -1,5 +1,54 @@
 # info_label
 
+## Version 2.0.0
+
+### Breaking Changes
+- **Removed `activeOnHover` bool** — replaced by composable flag. Hover is now enabled via `activeOnHover: true` and uses `ValueNotifier` + `CustomPainter.repaint` for paint-only updates (no widget rebuild).
+- **Removed `Widget? overlay`** — replaced by paintable overlay params (`overlayColor`, `overlayText`, `overlayBorderColor`, etc). Zero extra widgets.
+- **Removed `InfoLabelType` enum** — features are now composable flags (`activeOnHover`, `compactSize`, `overlayColor`) that can be combined freely.
+- **`_solid` distribution text color** — now auto-selects black/white based on background luminance instead of always defaulting to null.
+
+### New Features
+- **CustomPainter rendering** — all labels use `CustomPainter` as the base renderer. Background, border, and text (in compact mode) are painted directly on canvas for minimal RenderObject count.
+  - `_InfoLabelBasePainter` — background + border for base/hover variants.
+  - `_CompactTextPainter` — background + border + centered auto-scaled text for compact mode.
+  - `_OverlayPainter` — positioned indicator painted as `foregroundPainter`.
+- **Compact mode** (`compactSize`) — fixed-size square label with auto-scaled centered text via `TextPainter`. Replaces 6-widget tree with 1 `RenderCustomPaint`.
+- **Overlay indicator** — 4 modes, all painted (zero widgets):
+  - **Dot**: `overlayColor` only.
+  - **Badge**: `overlayColor` + `overlayText` (auto-expands to pill for multi-char text like "99+").
+  - **Text only**: `overlayText` without `overlayColor`.
+  - **Bordered badge**: `overlayColor` + `overlayText` + `overlayBorderColor`.
+- **iOS smooth corners** (`smoothCorners: true`) — superellipse/squircle corners using cubic bezier curves. Matches iOS/Figma continuous corner radius style.
+- **Composable features** — `activeOnHover`, `compactSize`, and `overlayColor`/`overlayText` can be combined freely. Only the needed layers are instantiated.
+- **Hover paint-only repaint** — `ValueNotifier<Color?>` passed to `CustomPainter.repaint`. Hover changes trigger only `paint()` — no `build()`, no layout, no widget tree diff.
+- **Auto-contrast text** — `_solid`, `_solidBackgroundTextContrastBorder`, `_solidBackgroundBorderContrastText`, and `_fullContrast` distribution modes auto-select black/white text based on background luminance when `textColor` is not explicitly set.
+
+### Architecture
+- **`part of` file organization** — each widget variant and painter is in its own `part` file:
+  - `_info_label_data.dart` — shared data object.
+  - `_info_label_painters.dart` — 3 CustomPainters + squircle path.
+  - `_base_info_label_widget.dart` — base variant + `_BaseContent`.
+  - `_compact_info_label_widget.dart` — compact variant.
+  - `_hover_info_label_widget.dart` — hover wrapper.
+  - `_color_by_type_info_widget.dart` — color lookup mixin.
+- **`_InfoLabelData`** — encapsulates 22+ shared params to avoid repetition across variants.
+- **Switch on record pattern** — `InfoLabel.build()` uses `switch ((activeOnHover, compactSize != null))` for zero-overhead routing.
+
+### Tests
+- **38 tests** (up from 11) — 17 unit tests + 4 assertion tests + 17 golden test groups.
+- **Golden tests restructured** — one file per concern:
+  - `golden_type_colors_test.dart` — 13 TypeInfoLabel colors + globalColor override.
+  - `golden_distribution_modes_test.dart` — 6 modes × 3 contrast levels.
+  - `golden_rounded_corners_test.dart` — circular vs smooth (squircle) at 5 radii.
+  - `golden_border_colors_test.dart` — border color and visibility.
+  - `golden_custom_colors_test.dart` — text/bg/globalColor overrides.
+  - `golden_layout_icons_test.dart` — icons, alignment, padding, msg.
+  - `golden_compact_test.dart` — compact sizing and text scaling.
+  - `golden_overlay_test.dart` — dots, badges, text-only, bordered, positions.
+  - `golden_hover_test.dart` — normal vs hover state comparison.
+- **Standardized golden config** — white background, 14px padding, Roboto font.
+
 ## Version 1.3.0
 - Updated Dart SDK constraint to ^3.10.0.
 - Fixed lint warning: added type annotation to `_onHoverAction` parameter.

@@ -1,46 +1,25 @@
-/// Library for customizable information labels in Flutter applications.
+/// High-performance information label widget for Flutter.
 ///
-/// The `info_label` library provides a collection of components for creating
-/// customizable information labels in Flutter applications. These labels can be
-/// used to visually represent various types of information, such as success messages,
-/// errors, warnings, and more, with flexible styling options.
+/// Built on `CustomPainter` — background, border, text (compact mode),
+/// and overlay indicators are painted directly on canvas for minimal
+/// widget overhead.
 ///
-/// Components exported by this library include:
-/// - `InfoLabel`: A widget for displaying customizable information labels with
-///   text, icons, and various styling options.
-/// - `TypeDistributionColor`: An enum defining different color distribution
-///   configurations for labels to optimize readability and visual appeal.
-/// - `TypeInfoLabel`: An enum representing different types of labels with associated
-///   meanings and colors for quick and easy labeling of information.
+/// Features:
+/// - [InfoLabel]: Main widget with composable features (compact, overlay, hover).
+/// - [TypeInfoLabel]: 13 label types with auto-contrast text color.
+/// - [TypeDistributionColor]: 6 color distribution modes.
 ///
-/// Example Usage:
 /// ```dart
-/// import 'package:info_label/info_label.dart';
+/// // Basic
+/// InfoLabel(text: "Success", typeInfoLabel: TypeInfoLabel.success)
 ///
-/// void main() {
-///   runApp(MyApp());
-/// }
-///
-/// class MyApp extends StatelessWidget {
-///   @override
-///   Widget build(BuildContext context) {
-///     return MaterialApp(
-///       home: Scaffold(
-///         appBar: AppBar(
-///           title: Text('Info Label Example'),
-///         ),
-///         body: Center(
-///           child: InfoLabel(
-///             text: 'Hello, World!',
-///             backgroundColor: Colors.blue,
-///             textColor: Colors.white,
-///             typeColor: TypeDistributionColor.solid,
-///           ),
-///         ),
-///       ),
-///     );
-///   }
-/// }
+/// // Compact with overlay
+/// InfoLabel(
+///   text: "S",
+///   compactSize: 24,
+///   overlayColor: Colors.red,
+///   overlayText: "3",
+/// )
 /// ```
 library info_label;
 

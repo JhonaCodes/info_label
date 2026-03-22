@@ -48,13 +48,16 @@ class DistributionColor {
 
   /// Retrieves a new instance of [DistributionColor] with solid color distribution.
   ///
-  /// In a solid color configuration, the same color is applied to the label's
-  /// background, border, and text, ensuring a consistent appearance.
+  /// In solid mode, background and border are the full type color.
+  /// When [textColor] is not explicitly set, it auto-selects black or white
+  /// based on the background luminance to ensure readability on both
+  /// dark backgrounds (success, dark, critical) and light backgrounds
+  /// (empty, pending, confirmed).
   DistributionColor get _solid => DistributionColor(
     backgroundColor: backgroundColor,
     borderColor: borderColor,
     contrastLevel: 1,
-    textColor: textColor,
+    textColor: textColor ?? _autoTextColor(backgroundColor),
   );
 
   /// Retrieves a new instance of [DistributionColor] with solid border, text contrast background.
@@ -76,7 +79,7 @@ class DistributionColor {
     backgroundColor: backgroundColor,
     borderColor: borderColor?.withValues(alpha: contrastLevel),
     contrastLevel: contrastLevel,
-    textColor: textColor ?? Colors.white,
+    textColor: textColor ?? _autoTextColor(backgroundColor),
   );
 
   /// Retrieves a new instance of [DistributionColor] with solid background, border contrast text.
@@ -87,7 +90,8 @@ class DistributionColor {
     backgroundColor: backgroundColor,
     borderColor: borderColor,
     contrastLevel: contrastLevel,
-    textColor: textColor?.withValues(alpha: contrastLevel) ?? Colors.white,
+    textColor: (textColor ?? _autoTextColor(backgroundColor))
+        .withValues(alpha: contrastLevel),
   );
 
   /// Retrieves a new instance of [DistributionColor] with solid text, contrast background border.
@@ -108,8 +112,13 @@ class DistributionColor {
     backgroundColor: backgroundColor.withValues(alpha: contrastLevel),
     borderColor: borderColor?.withValues(alpha: contrastLevel),
     contrastLevel: contrastLevel,
-    textColor: textColor?.withValues(alpha: contrastLevel) ?? Colors.white,
+    textColor: (textColor ?? _autoTextColor(backgroundColor))
+        .withValues(alpha: contrastLevel),
   );
+
+  /// Picks black or white text depending on the [bg] luminance.
+  static Color _autoTextColor(Color bg) =>
+      bg.computeLuminance() > 0.4 ? Colors.black87 : Colors.white;
 
   /// Returns a new instance of [DistributionColor] based on the specified [typeColor].
   ///
