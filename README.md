@@ -21,7 +21,7 @@ A high-performance Flutter label widget built on `CustomPainter`. Background, bo
 
 ```yaml
 dependencies:
-  info_label: ^2.0.0
+  info_label: ^2.0.1
 ```
 
 ```dart

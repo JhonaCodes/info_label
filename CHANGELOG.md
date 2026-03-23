@@ -1,5 +1,8 @@
 # info_label
 
+## Version 2.0.1
+- Fix golden images in pub.dev — use absolute GitHub raw URLs.
+
 ## Version 2.0.0
 
 ### Breaking Changes
