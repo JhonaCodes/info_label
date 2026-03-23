@@ -190,28 +190,28 @@ InfoLabel(
 ## Golden Tests
 
 ### Type Colors (solid)
-![Type Colors](test/golden_test/goldens/macos/golden_type_colors_solid.png)
+![Type Colors](https://raw.githubusercontent.com/JhonaCodes/info_label/main/test/golden_test/goldens/macos/golden_type_colors_solid.png)
 
 ### Color Distribution (contrast 0.3)
-![Distribution](test/golden_test/goldens/macos/golden_distribution_contrast_0_3.png)
+![Distribution](https://raw.githubusercontent.com/JhonaCodes/info_label/main/test/golden_test/goldens/macos/golden_distribution_contrast_0_3.png)
 
 ### Compact Mode
-![Compact](test/golden_test/goldens/macos/golden_compact.png)
+![Compact](https://raw.githubusercontent.com/JhonaCodes/info_label/main/test/golden_test/goldens/macos/golden_compact.png)
 
 ### Overlay Badges
-![Overlay Badges](test/golden_test/goldens/macos/golden_overlay_badges.png)
+![Overlay Badges](https://raw.githubusercontent.com/JhonaCodes/info_label/main/test/golden_test/goldens/macos/golden_overlay_badges.png)
 
 ### Overlay Positions
-![Overlay Positions](test/golden_test/goldens/macos/golden_overlay_positions.png)
+![Overlay Positions](https://raw.githubusercontent.com/JhonaCodes/info_label/main/test/golden_test/goldens/macos/golden_overlay_positions.png)
 
 ### Corner Comparison (circular vs smooth)
-![Corners](test/golden_test/goldens/macos/golden_corners_comparison.png)
+![Corners](https://raw.githubusercontent.com/JhonaCodes/info_label/main/test/golden_test/goldens/macos/golden_corners_comparison.png)
 
 ### Layout & Icons
-![Layout](test/golden_test/goldens/macos/golden_layout_icons.png)
+![Layout](https://raw.githubusercontent.com/JhonaCodes/info_label/main/test/golden_test/goldens/macos/golden_layout_icons.png)
 
 ### Hover States
-![Hover](test/golden_test/goldens/macos/golden_hover.png)
+![Hover](https://raw.githubusercontent.com/JhonaCodes/info_label/main/test/golden_test/goldens/macos/golden_hover.png)
 
 ## Migration from 1.x
 
